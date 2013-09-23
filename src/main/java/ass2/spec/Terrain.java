@@ -38,6 +38,13 @@ public class Terrain {
         myRoads = new ArrayList<Road>();
     }
 
+    public Terrain(double[][] altitudeSet){
+        mySize = new Dimension(altitudeSet.length, altitudeSet[0].length);
+        myAltitude = altitudeSet.clone();
+        myTrees = new ArrayList<Tree>();
+        myRoads = new ArrayList<Road>();
+    }
+
     public Terrain(Dimension size) {
         this(size.width, size.height);
     }
@@ -85,9 +92,24 @@ public class Terrain {
      * @return
      */
     public double altitude(double x, double z) {
-        double altitude = 0;
+        double altitude = 0, altitudeX1Z1, altitudeX1Z2, altitudeX2Z1, altitudeX2Z2;
+        int x1, x2, z1, z2;
+        double altitudeX1X2Z1, altitudeX1X2Z2;
 
-        
+        x1 = (int) x;
+        x2 = x1 + 1;
+        z1 = (int) z;
+        z2 = z1 + 1;
+
+        altitudeX1Z1 = myAltitude[x1][z1];
+        altitudeX1Z2 = myAltitude[x1][z2];
+        altitudeX2Z1 = myAltitude[x2][z1];
+        altitudeX2Z2 = myAltitude[x2][z2];
+
+        altitudeX1X2Z1 = Math.abs(altitudeX2Z1 - altitudeX1Z1) * x;
+        altitudeX1X2Z2 = Math.abs(altitudeX2Z2 - altitudeX2Z2) * x;
+
+        altitude = Math.abs(altitudeX1X2Z2 - altitudeX1X2Z1) * z;
         
         return altitude;
     }

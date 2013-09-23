@@ -30,8 +30,8 @@ public class TestAltitude {
 
     private static final double[][] altitudeSet4 = new double[][]
             {
-                    {1, 1},
-                    {1, 1}
+                    {0, 0},
+                    {0, 1}
             };
 
     private static final double[][] altitudeSet5 = new double[][]
@@ -47,11 +47,24 @@ public class TestAltitude {
         expectedInputOutput(0.3, 0.7, 0, terrain);
         expectedInputOutput(0.2, 0.9, 0, terrain);
         expectedInputOutput(0, 0, 0, terrain);
+//        expectedInputOutput(1, 1, 0, terrain);
+    }
+
+    @Test
+    public void testSet4(){
+        Terrain terrain = new Terrain(altitudeSet4);
+        System.out.println("Running tests on altitudeSet4...");
+        expectedInputOutput(0, 0, 0, terrain);
+        expectedInputOutput(0.5, 0, 0, terrain);
+        expectedInputOutput(0, 0.5, 0, terrain);
+        expectedInputOutput(1, 0.5, 0.5, terrain);
+        expectedInputOutput(0.5, 1, 0.5, terrain);
+        expectedInputOutput(1, 1, 1, terrain);
     }
 
     private static void expectedInputOutput(double x, double z, double altitude, Terrain terrain){
-        double calculatedAltitude = terrain.altitude(x, z);
-        System.out.println("Testing: x = " + x + "; z = " + "; expected altitude = " + altitude +
+        double calculatedAltitude = terrain.altitude(x, z, false);
+        System.out.println("Testing: x = " + x + "; z = " + z + "; expected altitude = " + altitude +
                 "; calculated altitude = " + calculatedAltitude);
         Assert.assertTrue(altitude == calculatedAltitude);
     }

@@ -91,26 +91,51 @@ public class Terrain {
      * @param z
      * @return
      */
-    public double altitude(double x, double z) {
+
+    public double altitude(double x, double z){
+        double altitude = 0;
+
+        altitude = altitude(x, z, false);
+
+        return altitude;
+    }
+
+    public double altitude(double x, double z, boolean DEBUG) {
         double altitude = 0, altitudeX1Z1, altitudeX1Z2, altitudeX2Z1, altitudeX2Z2;
         int x1, x2, z1, z2;
         double altitudeX1X2Z1, altitudeX1X2Z2;
 
         x1 = (int) x;
-        x2 = x1 + 1;
+        if(x1 == x){
+            x2 = x1;
+        } else {
+            x2 = x1 + 1;
+        }
+
         z1 = (int) z;
-        z2 = z1 + 1;
+        if(z1 == z){
+            z2 = z1;
+        } else {
+            z2 = z1 + 1;
+        }
 
         altitudeX1Z1 = myAltitude[x1][z1];
         altitudeX1Z2 = myAltitude[x1][z2];
         altitudeX2Z1 = myAltitude[x2][z1];
         altitudeX2Z2 = myAltitude[x2][z2];
 
-        altitudeX1X2Z1 = Math.abs(altitudeX2Z1 - altitudeX1Z1) * x;
-        altitudeX1X2Z2 = Math.abs(altitudeX2Z2 - altitudeX2Z2) * x;
+        altitudeX1X2Z1 = Math.abs(altitudeX2Z1 - altitudeX1Z1) * x + altitudeX1Z1;
+        altitudeX1X2Z2 = Math.abs(altitudeX2Z2 - altitudeX1Z2) * x + altitudeX1Z2;
 
-        altitude = Math.abs(altitudeX1X2Z2 - altitudeX1X2Z1) * z;
-        
+        altitude = Math.abs(altitudeX1X2Z2 - altitudeX1X2Z1) * z + altitudeX1X2Z1;
+
+        if(DEBUG){
+            System.out.println("x1 = " + x1 + "; x2 = " + x2 + "; z1 = " + z1 + "; z2 = " + z2);
+            System.out.println("altitudeX1Z1 = " + altitudeX1Z1 + "; altitudeX1Z2 = " + altitudeX1Z2 +
+                    "; altitudeX2Z1 = " + altitudeX2Z1 + "; altitudeX2Z2 = " + altitudeX2Z2);
+            System.out.println("altitudeX1X2Z1 = " + altitudeX1X2Z1 + "; altitudeX1X2Z2 = " + altitudeX1X2Z2);
+        }
+
         return altitude;
     }
 

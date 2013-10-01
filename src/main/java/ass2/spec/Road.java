@@ -29,7 +29,7 @@ public class Road {
      * @param width
      * @param spine
      */
-    public Road(int width, double[] spine) {
+    public Road(double width, double[] spine) {
         myWidth = width;
         myPoints = new ArrayList<Double>();
         for (int i = 0; i < spine.length; i++) {

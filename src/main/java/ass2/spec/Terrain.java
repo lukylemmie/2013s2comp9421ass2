@@ -1,24 +1,9 @@
 package ass2.spec;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-import javax.media.opengl.GL2;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-
-//import sailing.objects.Island;
 
 /**
  * COMMENT: Comment HeightMap 
@@ -26,26 +11,27 @@ import org.json.JSONTokener;
  * @author malcolmr
  */
 public class Terrain {
-    static Logger logger = Logger.getLogger(Terrain.class.getName());
+    Logger logger = Logger.getLogger(Terrain.class.getName());
     private Dimension mySize;
     private double[][] myAltitude;
     private List<Tree> myTrees;
     private List<Road> myRoads;
+    private float[] mySunlight;
 
-    public Terrain(int width, int height) {
-        mySize = new Dimension(width, height);
-        myAltitude = new double[width][height];
+    /**
+     * Create a new terrain
+     *
+     * @param width The number of vertices in the x-direction
+     * @param depth The number of vertices in the z-direction
+     */
+    public Terrain(int width, int depth) {
+        mySize = new Dimension(width, depth);
+        myAltitude = new double[width][depth];
         myTrees = new ArrayList<Tree>();
         myRoads = new ArrayList<Road>();
+        mySunlight = new float[3];
     }
-
-    public Terrain(double[][] altitudeSet){
-        mySize = new Dimension(altitudeSet.length, altitudeSet[0].length);
-        myAltitude = altitudeSet.clone();
-        myTrees = new ArrayList<Tree>();
-        myRoads = new ArrayList<Road>();
-    }
-
+    
     public Terrain(Dimension size) {
         this(size.width, size.height);
     }
@@ -62,6 +48,31 @@ public class Terrain {
         return myRoads;
     }
 
+    public float[] getSunlight() {
+        return mySunlight;
+    }
+
+    /**
+     * Set the sunlight direction. 
+     * 
+     * Note: the sun should be treated as a directional light, without a position
+     * 
+     * @param dx
+     * @param dy
+     * @param dz
+     */
+    public void setSunlightDir(float dx, float dy, float dz) {
+        mySunlight[0] = dx;
+        mySunlight[1] = dy;
+        mySunlight[2] = dz;        
+    }
+    
+    /**
+     * Resize the terrain, copying any old altitudes. 
+     * 
+     * @param width
+     * @param height
+     */
     public void setSize(int width, int height) {
         mySize = new Dimension(width, height);
         double[][] oldAlt = myAltitude;
@@ -74,16 +85,30 @@ public class Terrain {
         }
     }
 
+    /**
+     * Get the altitude at a grid point
+     * 
+     * @param x
+     * @param z
+     * @return
+     */
     public double getGridAltitude(int x, int z) {
         return myAltitude[x][z];
     }
 
+    /**
+     * Set the altitude at a grid point
+     * 
+     * @param x
+     * @param z
+     * @return
+     */
     public void setGridAltitude(int x, int z, double h) {
         myAltitude[x][z] = h;
     }
 
     /**
-     * Get the altitude at a point. 
+     * Get the altitude at an arbitrary point. 
      * Non-integer points should be interpolated from neighbouring grid points
      * 
      * TO BE COMPLETED
@@ -92,16 +117,7 @@ public class Terrain {
      * @param z
      * @return
      */
-
-    public double altitude(double x, double z){
-        double altitude = 0;
-
-        altitude = altitude(x, z, false);
-
-        return altitude;
-    }
-
-    public double altitude(double x, double z, boolean DEBUG) {
+    public double altitude(double x, double z) {
         double altitude = 0, altitudeX1Z1, altitudeX1Z2, altitudeX2Z1, altitudeX2Z2;
         int x1, x2, z1, z2;
         double altitudeX1X2Z1, altitudeX1X2Z2, dx, dz;
@@ -134,16 +150,16 @@ public class Terrain {
 
         altitude = dz * altitudeX1X2Z1 + (1 - dz) * altitudeX1X2Z2;
 
-        if(DEBUG){
-            System.out.println("x1 = " + x1 + "; x2 = " + x2 + "; z1 = " + z1 + "; z2 = " + z2);
-            System.out.println("altitudeX1Z1 = " + altitudeX1Z1 + "; altitudeX1Z2 = " + altitudeX1Z2 +
-                    "; altitudeX2Z1 = " + altitudeX2Z1 + "; altitudeX2Z2 = " + altitudeX2Z2);
-            System.out.println("altitudeX1X2Z1 = " + altitudeX1X2Z1 + "; altitudeX1X2Z2 = " + altitudeX1X2Z2);
-        }
-
         return altitude;
     }
 
+    /**
+     * Add a tree at the specified (x,z) point. 
+     * The tree's y coordinate is calculated from the altitude of the terrain at that point.
+     * 
+     * @param x
+     * @param z
+     */
     public void addTree(double x, double z) {
         double y = altitude(x, z);
         Tree tree = new Tree(x, y, z);
@@ -151,9 +167,15 @@ public class Terrain {
     }
 
 
-    public void addRoad(int width, double[] spine) {
+    /**
+     * Add a road. 
+     * 
+     * @param width
+     * @param spine
+     */
+    public void addRoad(double width, double[] spine) {
         Road road = new Road(width, spine);
-        myRoads.add(road);
+        myRoads.add(road);        
     }
 
 

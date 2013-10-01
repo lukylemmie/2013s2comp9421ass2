@@ -85,7 +85,7 @@ public class TestAltitude {
     }
 
     private static void expectedInputOutput(double x, double z, double altitude, Terrain terrain){
-        double calculatedAltitude = terrain.altitude(x, z, false);
+        double calculatedAltitude = terrain.altitude(x, z);
         logger.info("Testing: x = " + x + "; z = " + z + "; expected altitude = " + altitude +
                 "; calculated altitude = " + calculatedAltitude);
         Assert.assertTrue(altitude == calculatedAltitude);

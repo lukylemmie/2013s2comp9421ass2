@@ -32,6 +32,13 @@ public class Terrain {
         mySunlight = new float[3];
     }
     
+    public Terrain(double[][] altitudeSet){
+        mySize = new Dimension(altitudeSet.length, altitudeSet[0].length);
+        myAltitude = altitudeSet.clone();
+        myTrees = new ArrayList<Tree>();
+        myRoads = new ArrayList<Road>();
+    }
+
     public Terrain(Dimension size) {
         this(size.width, size.height);
     }

@@ -31,7 +31,9 @@ public class Terrain {
         myRoads = new ArrayList<Road>();
         mySunlight = new float[3];
     }
-    
+
+    //
+    @Deprecated
     public Terrain(double[][] altitudeSet){
         mySize = new Dimension(altitudeSet.length, altitudeSet[0].length);
         myAltitude = altitudeSet.clone();

@@ -106,7 +106,7 @@ public class TeapotView implements GLEventListener {
             gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_LINE);
         }
         else {
-            gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);
+            gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
         }
         
         gl.glShadeModel(myTeapot.isSmooth() ? GL2.GL_SMOOTH : GL2.GL_FLAT);
@@ -150,6 +150,7 @@ public class TeapotView implements GLEventListener {
             break;
 
         }
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     private void drawCamera(GL2 gl) {

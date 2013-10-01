@@ -2,6 +2,8 @@ import ass2.spec.Terrain;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.logging.Logger;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Andrew2012
@@ -10,6 +12,8 @@ import org.junit.Test;
  * To change this template use File | Settings | File Templates.
  */
 public class TestAltitude {
+    static Logger logger = Logger.getLogger(TestAltitude.class.getName());
+
     private static final double[][] altitudeSet1 = new double[][]
             {
                     {0, 0},
@@ -43,7 +47,7 @@ public class TestAltitude {
     @Test
     public void testSet1(){
         Terrain terrain = new Terrain(altitudeSet1);
-        System.out.println("Running tests on altitudeSet1...");
+        logger.info("\nRunning tests on altitudeSet1...\n");
         expectedInputOutput(0.3, 0.7, 0, terrain);
         expectedInputOutput(0.2, 0.9, 0, terrain);
         expectedInputOutput(0, 0, 0, terrain);
@@ -53,19 +57,38 @@ public class TestAltitude {
     @Test
     public void testSet4(){
         Terrain terrain = new Terrain(altitudeSet4);
-        System.out.println("Running tests on altitudeSet4...");
+        logger.info("\nRunning tests on altitudeSet4...\n");
         expectedInputOutput(0, 0, 0, terrain);
-        expectedInputOutput(0.5, 0, 0, terrain);
-        expectedInputOutput(0, 0.5, 0, terrain);
-        expectedInputOutput(1, 0.5, 0.5, terrain);
-        expectedInputOutput(0.5, 1, 0.5, terrain);
+        expectedInputOutput(0, 1, 0, terrain);
+        expectedInputOutput(1, 0, 0, terrain);
         expectedInputOutput(1, 1, 1, terrain);
+        expectedInputOutput(0, 0.5, 0, terrain);
+        expectedInputOutput(0.5, 0, 0, terrain);
+        expectedInputOutput(0.5, 1, 0.5, terrain);
+        expectedInputOutput(1, 0.5, 0.5, terrain);
+        expectedInputOutput(0.5, 0.5, 0.25, terrain);
+    }
+
+    @Test
+    public void testSet5(){
+        Terrain terrain = new Terrain(altitudeSet5);
+        logger.info("\nRunning tests on altitudeSet5...\n");
+        expectedInputOutput(0, 0, 2, terrain);
+        expectedInputOutput(0, 1, 8, terrain);
+        expectedInputOutput(1, 0, 6, terrain);
+        expectedInputOutput(1, 1, 10, terrain);
+        expectedInputOutput(0.5, 0, 4, terrain);
+        expectedInputOutput(0, 0.5, 5, terrain);
+        expectedInputOutput(1, 0.5, 8, terrain);
+        expectedInputOutput(0.5, 1, 9, terrain);
+        expectedInputOutput(0.5, 0.5, 6.5, terrain);
     }
 
     private static void expectedInputOutput(double x, double z, double altitude, Terrain terrain){
         double calculatedAltitude = terrain.altitude(x, z, false);
-        System.out.println("Testing: x = " + x + "; z = " + z + "; expected altitude = " + altitude +
+        logger.info("Testing: x = " + x + "; z = " + z + "; expected altitude = " + altitude +
                 "; calculated altitude = " + calculatedAltitude);
         Assert.assertTrue(altitude == calculatedAltitude);
+        logger.info("Expected altitude calculated\n");
     }
 }

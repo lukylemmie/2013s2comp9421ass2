@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.media.opengl.GL2;
 
@@ -25,7 +26,7 @@ import org.json.JSONTokener;
  * @author malcolmr
  */
 public class Terrain {
-
+    static Logger logger = Logger.getLogger(Terrain.class.getName());
     private Dimension mySize;
     private double[][] myAltitude;
     private List<Tree> myTrees;
@@ -103,31 +104,35 @@ public class Terrain {
     public double altitude(double x, double z, boolean DEBUG) {
         double altitude = 0, altitudeX1Z1, altitudeX1Z2, altitudeX2Z1, altitudeX2Z2;
         int x1, x2, z1, z2;
-        double altitudeX1X2Z1, altitudeX1X2Z2;
+        double altitudeX1X2Z1, altitudeX1X2Z2, dx, dz;
 
         x1 = (int) x;
+        dx = x - x1;
         if(x1 == x){
             x2 = x1;
         } else {
             x2 = x1 + 1;
         }
+        logger.info("x1 = " + x1 + "; x2 = " + x2 + "; dx = " + dx);
 
         z1 = (int) z;
+        dz = z - z1;
         if(z1 == z){
             z2 = z1;
         } else {
             z2 = z1 + 1;
         }
+        logger.info("z1 = " + z1 + "; z2 = " + z2 + "; dz = " + dz);
 
         altitudeX1Z1 = myAltitude[x1][z1];
         altitudeX1Z2 = myAltitude[x1][z2];
         altitudeX2Z1 = myAltitude[x2][z1];
         altitudeX2Z2 = myAltitude[x2][z2];
 
-        altitudeX1X2Z1 = Math.abs(altitudeX2Z1 - altitudeX1Z1) * x + altitudeX1Z1;
-        altitudeX1X2Z2 = Math.abs(altitudeX2Z2 - altitudeX1Z2) * x + altitudeX1Z2;
+        altitudeX1X2Z1 = dx * altitudeX1Z1 + (1 - dx) * altitudeX2Z1;
+        altitudeX1X2Z2 = dx * altitudeX1Z2 + (1 - dx) * altitudeX2Z2;
 
-        altitude = Math.abs(altitudeX1X2Z2 - altitudeX1X2Z1) * z + altitudeX1X2Z1;
+        altitude = dz * altitudeX1X2Z1 + (1 - dz) * altitudeX1X2Z2;
 
         if(DEBUG){
             System.out.println("x1 = " + x1 + "; x2 = " + x2 + "; z1 = " + z1 + "; z2 = " + z2);
@@ -148,7 +153,7 @@ public class Terrain {
 
     public void addRoad(int width, double[] spine) {
         Road road = new Road(width, spine);
-        myRoads.add(road);        
+        myRoads.add(road);
     }
 
 

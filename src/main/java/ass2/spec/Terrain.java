@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author malcolmr
  */
 public class Terrain {
-    Logger logger = Logger.getLogger(Terrain.class.getName());
+    private Logger logger = Logger.getLogger(Terrain.class.getName());
     private Dimension mySize;
     private double[][] myAltitude;
     private List<Tree> myTrees;

@@ -106,7 +106,7 @@ public class TeapotView implements GLEventListener {
             gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_LINE);
         }
         else {
-            gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);            
+            gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);
         }
         
         gl.glShadeModel(myTeapot.isSmooth() ? GL2.GL_SMOOTH : GL2.GL_FLAT);
@@ -170,7 +170,7 @@ public class TeapotView implements GLEventListener {
         GLUT glut = new GLUT();
         // draw wireframe
         gl.glColor3d(0, 0, 0);
-        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);       
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
 
         if (myTeapot.isPerspective()) {
             // perspective view volume
@@ -208,7 +208,6 @@ public class TeapotView implements GLEventListener {
         
         gl.glPopMatrix();
 
-        
     }
     
     /**

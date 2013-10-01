@@ -82,6 +82,11 @@ public class TestAltitude {
         expectedInputOutput(1, 0.5, 8, terrain);
         expectedInputOutput(0.5, 1, 9, terrain);
         expectedInputOutput(0.5, 0.5, 6.5, terrain);
+        expectedInputOutput(0, 0.25, 3.5, terrain);
+        expectedInputOutput(0.25, 0, 3, terrain);
+        expectedInputOutput(1, 0.25, 7, terrain);
+        expectedInputOutput(0.25, 1, 8.5, terrain);
+        expectedInputOutput(0.25, 0.25, 4.375, terrain);
     }
 
     private static void expectedInputOutput(double x, double z, double altitude, Terrain terrain){

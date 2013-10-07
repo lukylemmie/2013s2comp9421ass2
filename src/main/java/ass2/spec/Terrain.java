@@ -151,6 +151,8 @@ public class Terrain {
 
         altitude = (1 - dz) * altitudeX1X2Z1 + dz * altitudeX1X2Z2;
 
+        altitude = cleanNumberTo10dp(altitude);
+
         return altitude;
     }
 
@@ -179,5 +181,8 @@ public class Terrain {
         myRoads.add(road);        
     }
 
-
+    public static double cleanNumberTo10dp(double x){
+        x = Math.round(x * (1e10)) / 1e10;
+        return x;
+    }
 }

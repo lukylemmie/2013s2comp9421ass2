@@ -48,10 +48,52 @@ public class TestAltitude {
     public void testSet1(){
         Terrain terrain = new Terrain(altitudeSet1);
         logger.info("\nRunning tests on altitudeSet1...\n");
+        expectedInputOutput(0, 0, 0, terrain);
+        expectedInputOutput(0, 1, 0, terrain);
+        expectedInputOutput(1, 0, 0, terrain);
+        expectedInputOutput(1, 1, 0, terrain);
         expectedInputOutput(0.3, 0.7, 0, terrain);
         expectedInputOutput(0.2, 0.9, 0, terrain);
+    }
+
+    @Test
+    public void testSet2(){
+        Terrain terrain = new Terrain(altitudeSet2);
+        logger.info("\nRunning tests on altitudeSet1...\n");
         expectedInputOutput(0, 0, 0, terrain);
-//        expectedInputOutput(1, 1, 0, terrain);
+        expectedInputOutput(0, 1, 1, terrain);
+        expectedInputOutput(1, 0, 0, terrain);
+        expectedInputOutput(1, 1, 1, terrain);
+        expectedInputOutput(0, 0.7, 0.7, terrain);
+        expectedInputOutput(1, 0.7, 0.7, terrain);
+        expectedInputOutput(0.3, 0, 0, terrain);
+        expectedInputOutput(0.3, 1, 1, terrain);
+        expectedInputOutput(0.3, 0.7, 0.7, terrain);
+        expectedInputOutput(0, 0.9, 0.9, terrain);
+        expectedInputOutput(1, 0.9, 0.9, terrain);
+        expectedInputOutput(0.2, 0, 0, terrain);
+        expectedInputOutput(0.2, 1, 1, terrain);
+        expectedInputOutput(0.2, 0.9, 0.9, terrain);
+    }
+
+    @Test
+    public void testSet3(){
+        Terrain terrain = new Terrain(altitudeSet3);
+        logger.info("\nRunning tests on altitudeSet1...\n");
+        expectedInputOutput(0, 0, 0, terrain);
+        expectedInputOutput(0, 1, 0, terrain);
+        expectedInputOutput(1, 0, 1, terrain);
+        expectedInputOutput(1, 1, 1, terrain);
+        expectedInputOutput(0, 0.7, 0, terrain);
+        expectedInputOutput(1, 0.7, 1, terrain);
+        expectedInputOutput(0.3, 0, 0.3, terrain);
+        expectedInputOutput(0.3, 1, 0.3, terrain);
+        expectedInputOutput(0.3, 0.7, 0.3, terrain);
+        expectedInputOutput(0, 0.9, 0, terrain);
+        expectedInputOutput(1, 0.9, 1, terrain);
+        expectedInputOutput(0.2, 0, 0.2, terrain);
+        expectedInputOutput(0.2, 1, 0.2, terrain);
+        expectedInputOutput(0.2, 0.9, 0.2, terrain);
     }
 
     @Test
@@ -62,11 +104,16 @@ public class TestAltitude {
         expectedInputOutput(0, 1, 0, terrain);
         expectedInputOutput(1, 0, 0, terrain);
         expectedInputOutput(1, 1, 1, terrain);
-        expectedInputOutput(0, 0.5, 0, terrain);
-        expectedInputOutput(0.5, 0, 0, terrain);
-        expectedInputOutput(0.5, 1, 0.5, terrain);
-        expectedInputOutput(1, 0.5, 0.5, terrain);
-        expectedInputOutput(0.5, 0.5, 0.25, terrain);
+        expectedInputOutput(0, 0.7, 0, terrain);
+        expectedInputOutput(1, 0.7, 0.7, terrain);
+        expectedInputOutput(0.3, 0, 0, terrain);
+        expectedInputOutput(0.3, 1, 0.3, terrain);
+        expectedInputOutput(0.3, 0.7, 0.21, terrain);
+        expectedInputOutput(0, 0.9, 0, terrain);
+        expectedInputOutput(1, 0.9, 0.9, terrain);
+        expectedInputOutput(0.2, 0, 0, terrain);
+        expectedInputOutput(0.2, 1, 0.2, terrain);
+        expectedInputOutput(0.2, 0.9, 0.18, terrain);
     }
 
     @Test

@@ -30,12 +30,11 @@ public class Car {
         gl.glPushMatrix();
                 
         drawBody(gl);
-        
-        for (int i = 0; i < myWheels.length; i++) {
-            myWheels[i].draw(gl);
+
+        for (Wheel myWheel : myWheels) {
+            myWheel.draw(gl);
         }
-        
-        
+
         gl.glPopMatrix();
     }
 
@@ -93,7 +92,5 @@ public class Car {
         gl.glEnd();
         
         gl.glPopMatrix();
-
     }
-
 }

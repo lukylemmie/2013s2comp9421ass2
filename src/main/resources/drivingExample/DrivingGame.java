@@ -1,5 +1,6 @@
 package drivingExample;
 
+import ass2.spec.Tree;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.media.opengl.*;
@@ -19,7 +20,8 @@ public class DrivingGame extends JFrame implements GLEventListener {
 
     private static final double CAMERA_DIST = 5;
     private static final float FOV = 90;
-    private Car myCar;
+//    private Car myCar;
+    private Tree myTree;
     private Floor myFloor;
     private double verticalRotation = 30;
     private double horizontalRotation = 120;
@@ -49,7 +51,9 @@ public class DrivingGame extends JFrame implements GLEventListener {
         super("Driving Game!");   
         
         myFloor = new Floor(10, 10);
-        myCar = new Car();
+        myTree = new Tree(0,0,0);
+//        myCar = new Car();
+
     }
     
     private void run() {
@@ -112,8 +116,8 @@ public class DrivingGame extends JFrame implements GLEventListener {
         gl.glRotated(horizontalRotation, 0, 1, 0);
         
         myFloor.draw(gl);
-        myCar.draw(gl);
-        
+//        myCar.draw(gl);
+        myTree.draw(gl);
     }
 
     @Override

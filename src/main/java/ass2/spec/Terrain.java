@@ -146,14 +146,24 @@ public class Terrain {
         altitudeX2Z1 = myAltitude[x2][z1];
         altitudeX2Z2 = myAltitude[x2][z2];
 
-        altitudeX1X2Z1 = (1 - dx) * altitudeX1Z1 + dx * altitudeX2Z1;
-        altitudeX1X2Z2 = (1 - dx) * altitudeX1Z2 + dx * altitudeX2Z2;
+        //handle 1 direction
+        altitudeX1X2Z1 = interpolate(altitudeX1Z1, altitudeX2Z1, dx);
+        altitudeX1X2Z2 = interpolate(altitudeX1Z2, altitudeX2Z2, dx);
 
-        altitude = (1 - dz) * altitudeX1X2Z1 + dz * altitudeX1X2Z2;
+        //handle the other direction
+        altitude = interpolate(altitudeX1X2Z1, altitudeX1X2Z2, dz);
 
+        //fix rounding errors
         altitude = cleanNumberTo10dp(altitude);
 
         return altitude;
+    }
+
+    //@param x is the first value
+    //@param y is the second value
+    //@param t is the weighting between the points
+    public double interpolate(double x, double y, double t){
+        return ((1 - t) * x + t * y);
     }
 
     /**

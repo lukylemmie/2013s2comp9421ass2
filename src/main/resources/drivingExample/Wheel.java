@@ -40,7 +40,7 @@ public class Wheel {
             gl.glNormal3d(0, 0, -1);
             gl.glVertex3d(0, 0, 0);
         
-            double angleStep = 2 * Math.PI / CIRCLE_STEPS; 
+            double angleStep = 2 * Math.PI / CIRCLE_STEPS;
             for (int i = 0; i < CIRCLE_STEPS; i++) {
                 double x = Math.cos(i * angleStep);
                 double y = Math.sin(i * angleStep);
@@ -57,24 +57,24 @@ public class Wheel {
             gl.glVertex3d(0, 0, 1);
             
             double angleStep = 2 * Math.PI / CIRCLE_STEPS; 
-            for (int i = 0; i < CIRCLE_STEPS; i++) {
+            for (int i = 0; i < CIRCLE_STEPS + 1; i++) {
                 double x = Math.cos(i * angleStep);
                 double y = Math.sin(i * angleStep);
                 
                 gl.glVertex3d(-x, y, 1);
             }
-            gl.glVertex3d(1, 0, 0);            
+            gl.glVertex3d(1, 0, 0);
 
         }
         gl.glEnd();
         
         gl.glBegin(GL2.GL_QUADS);
         {
-            double angleStep = 2 * Math.PI / CIRCLE_STEPS; 
+            double angleStep = 2 * Math.PI / CIRCLE_STEPS;
             for (int i = 0; i < CIRCLE_STEPS; i++) {
                 double a0 = i * angleStep;
                 double a1 = ((i+1) % CIRCLE_STEPS) * angleStep;
-                
+
                 double x0 = Math.cos(a0);
                 double y0 = Math.sin(a0);
 

@@ -1,13 +1,14 @@
 package drivingExample;
 
 import com.jogamp.opengl.util.FPSAnimator;
-//import pong3d.Keyboard;
 
 import javax.media.opengl.*;
 import javax.media.opengl.awt.GLJPanel;
 import javax.media.opengl.glu.GLU;
 import javax.swing.*;
 import java.awt.*;
+
+//import pong3d.Keyboard;
 
 /**
  * COMMENT: Comment DrivingGame 
@@ -20,6 +21,29 @@ public class DrivingGame extends JFrame implements GLEventListener {
     private static final float FOV = 90;
     private Car myCar;
     private Floor myFloor;
+    private double verticalRotation = 30;
+    private double horizontalRotation = 120;
+    private boolean upHeld = false;
+    private boolean downHeld = false;
+
+    public void setUpHeld(boolean upHeld) {
+        this.upHeld = upHeld;
+    }
+
+    public void setDownHeld(boolean downHeld) {
+        this.downHeld = downHeld;
+    }
+
+    public void setLeftHeld(boolean leftHeld) {
+        this.leftHeld = leftHeld;
+    }
+
+    public void setRightHeld(boolean rightHeld) {
+        this.rightHeld = rightHeld;
+    }
+
+    private boolean leftHeld = false;
+    private boolean rightHeld = false;
 
     public DrivingGame() {
         super("Driving Game!");   
@@ -32,9 +56,10 @@ public class DrivingGame extends JFrame implements GLEventListener {
         GLProfile glprofile = GLProfile.getDefault();
         GLCapabilities glcapabilities = new GLCapabilities(glprofile);
         GLJPanel panel = new GLJPanel(glcapabilities);
+        MyKeyboard myKeyboard = new MyKeyboard(this);
 
         panel.addGLEventListener(this);
-//        panel.addKeyListener(Keyboard.theKeyboard);
+        panel.addKeyListener(myKeyboard);
         panel.setFocusable(true);
         panel.requestFocus();
 
@@ -79,7 +104,12 @@ public class DrivingGame extends JFrame implements GLEventListener {
         gl.glColor4d(0,0,0,1);
         
         gl.glTranslated(0,0, -CAMERA_DIST);
-        gl.glRotated(30, 1, 0, 0);
+        if(upHeld) verticalRotationUp();
+        if(downHeld) verticalRotationDown();
+        if(leftHeld) horizontalRotationUp();
+        if(rightHeld) horizontalRotationDown();
+        gl.glRotated(verticalRotation, 1, 0, 0);
+        gl.glRotated(horizontalRotation, 0, 1, 0);
         
         myFloor.draw(gl);
         myCar.draw(gl);
@@ -108,5 +138,19 @@ public class DrivingGame extends JFrame implements GLEventListener {
         game.run();
     }
 
+    public void verticalRotationUp(){
+        verticalRotation++;
+    }
 
+    public void verticalRotationDown(){
+        verticalRotation--;
+    }
+
+    public void horizontalRotationUp(){
+        horizontalRotation++;
+    }
+
+    public void horizontalRotationDown(){
+        horizontalRotation--;
+    }
 }

@@ -111,8 +111,8 @@ public class Tree {
             //top of cylinder
             double angleStep = 2 * Math.PI / CIRCLE_STEPS;
             for (int i = 0; i < CIRCLE_STEPS + 1; i++) {
-                double x = Math.cos(i * angleStep);
-                double y = Math.sin(i * angleStep);
+                double x = Math.cos(i * angleStep) * 0.5;
+                double y = Math.sin(i * angleStep) * 0.5;
 
                 gl.glVertex3d(x, y, 0);
             }

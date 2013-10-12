@@ -146,7 +146,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
         double aspect = 1.0 * width / height;
 
         GLU glu = new GLU();
-        glu.gluPerspective(FOV, aspect, 1, CAMERA_DIST + 2);
+        glu.gluPerspective(FOV, aspect, 1, CAMERA_DIST + 2 + 20);
     }
 
     public static void main(String[] args) {

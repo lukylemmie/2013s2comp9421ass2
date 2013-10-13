@@ -1,6 +1,7 @@
 package drivingExample;
 
 import ass2.spec.MyKeyboard;
+import ass2.spec.Terrain;
 import ass2.spec.Tree;
 import com.jogamp.opengl.util.FPSAnimator;
 
@@ -21,8 +22,24 @@ public class DrivingGame extends JFrame implements GLEventListener {
 
     private static final double CAMERA_DIST = 5;
     private static final float FOV = 90;
+    private static final double[][] altitudeSet1 = new double[][]
+            {
+                    {0, 1, 2, 1, 0},
+                    {1, 2, 3, 1, 1},
+                    {2, 3, 4, 3, 2},
+                    {1, 2, 3, 1, 1},
+                    {0, 1, 2, 1, 0}
+            };
+    private static final double[][] altitudeSet5 = new double[][]
+            {
+                    {2, 8, 6, 10},
+                    {6, 10, 8, 2},
+                    {8, 2, 10, 6},
+                    {10, 6, 2, 8}
+            };
     //    private Car myCar;
-    private Tree myTree;
+    private Terrain myTerrain;
+    //    private Tree myTree;
     private Floor myFloor;
     private double verticalRotation = 30;
     private double horizontalRotation = 120;
@@ -59,8 +76,9 @@ public class DrivingGame extends JFrame implements GLEventListener {
     public DrivingGame() {
         super("Driving Game!");
 
+        myTerrain = new Terrain(altitudeSet1);
         myFloor = new Floor(10, 10);
-        myTree = new Tree(0, 0, 0);
+//        myTree = new Tree(0, 0, 0);
 //        myCar = new Car();
 
     }
@@ -131,7 +149,8 @@ public class DrivingGame extends JFrame implements GLEventListener {
 
         myFloor.draw(gl);
 //        myCar.draw(gl);
-        myTree.draw(gl);
+//        myTree.draw(gl);
+        myTerrain.draw(gl);
     }
 
     @Override

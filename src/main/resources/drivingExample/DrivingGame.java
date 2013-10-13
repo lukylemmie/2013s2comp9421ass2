@@ -24,10 +24,26 @@ public class DrivingGame extends JFrame implements GLEventListener {
     private static final float FOV = 90;
     private static final double[][] altitudeSet1 = new double[][]
             {
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0}
+            };
+    private static final double[][] altitudeSet2 = new double[][]
+            {
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 1, 0, 0},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0}
+            };
+    private static final double[][] altitudeSet3 = new double[][]
+            {
                     {0, 1, 2, 1, 0},
-                    {1, 2, 3, 1, 1},
+                    {1, 2, 3, 2, 1},
                     {2, 3, 4, 3, 2},
-                    {1, 2, 3, 1, 1},
+                    {1, 2, 3, 2, 1},
                     {0, 1, 2, 1, 0}
             };
     private static final double[][] altitudeSet5 = new double[][]
@@ -76,7 +92,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
     public DrivingGame() {
         super("Driving Game!");
 
-        myTerrain = new Terrain(altitudeSet1);
+        myTerrain = new Terrain(altitudeSet2);
         myFloor = new Floor(10, 10);
 //        myTree = new Tree(0, 0, 0);
 //        myCar = new Car();

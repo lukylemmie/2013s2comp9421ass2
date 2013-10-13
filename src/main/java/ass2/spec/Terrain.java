@@ -221,9 +221,9 @@ public class Terrain {
 
         gl.glBegin(GL2.GL_TRIANGLES);
         {
-            Double a[] = {Double.valueOf(i), myAltitude[i][j], Double.valueOf(j)};
-            Double b[] = {Double.valueOf(i), myAltitude[i][j + 1], Double.valueOf(j + 1)};
-            Double c[] = {i + 0.5, altitude(i + 0.5, j + 0.5), j + 0.5};
+            Double a[] = {Double.valueOf(0), myAltitude[i][j], Double.valueOf(0)};
+            Double b[] = {Double.valueOf(0), myAltitude[i][j + 1], Double.valueOf(1)};
+            Double c[] = {0.5, altitude(i + 0.5, j + 0.5), 0.5};
             Double u[] = {a[0] - b[0], a[1] - b[1], a[2] - b[2]};
             Double v[] = {b[0] - c[0], b[1] - c[1], b[2] - c[2]};
 
@@ -254,9 +254,9 @@ public class Terrain {
 
         gl.glBegin(GL2.GL_TRIANGLES);
         {
-            Double a[] = {Double.valueOf(i), myAltitude[i][j + 1], Double.valueOf(j + 1)};
-            Double b[] = {Double.valueOf(i + 1), myAltitude[i + 1][j + 1], Double.valueOf(j + 1)};
-            Double c[] = {i + 0.5, altitude(i + 0.5, j + 0.5), j + 0.5};
+            Double a[] = {Double.valueOf(0), myAltitude[i][j + 1], Double.valueOf(1)};
+            Double b[] = {Double.valueOf(1), myAltitude[i + 1][j + 1], Double.valueOf(1)};
+            Double c[] = {0.5, altitude(i + 0.5, j + 0.5), 0.5};
             Double u[] = {a[0] - b[0], a[1] - b[1], a[2] - b[2]};
             Double v[] = {b[0] - c[0], b[1] - c[1], b[2] - c[2]};
 
@@ -287,9 +287,9 @@ public class Terrain {
 
         gl.glBegin(GL2.GL_TRIANGLES);
         {
-            Double a[] = {Double.valueOf(i + 1), myAltitude[i + 1][j + 1], Double.valueOf(j + 1)};
-            Double b[] = {Double.valueOf(i + 1), myAltitude[i + 1][j], Double.valueOf(j)};
-            Double c[] = {i + 0.5, altitude(i + 0.5, j + 0.5), j + 0.5};
+            Double a[] = {Double.valueOf(1), myAltitude[i + 1][j + 1], Double.valueOf(1)};
+            Double b[] = {Double.valueOf(1), myAltitude[i + 1][j], Double.valueOf(0)};
+            Double c[] = {0.5, altitude(i + 0.5, j + 0.5), 0.5};
             Double u[] = {a[0] - b[0], a[1] - b[1], a[2] - b[2]};
             Double v[] = {b[0] - c[0], b[1] - c[1], b[2] - c[2]};
 
@@ -320,9 +320,9 @@ public class Terrain {
 
         gl.glBegin(GL2.GL_TRIANGLES);
         {
-            Double a[] = {Double.valueOf(i + 1), myAltitude[i + 1][j], Double.valueOf(j)};
-            Double b[] = {Double.valueOf(i), myAltitude[i][j], Double.valueOf(j)};
-            Double c[] = {i + 0.5, altitude(i + 0.5, j + 0.5), j + 0.5};
+            Double a[] = {Double.valueOf(1), myAltitude[i + 1][j], Double.valueOf(0)};
+            Double b[] = {Double.valueOf(0), myAltitude[i][j], Double.valueOf(0)};
+            Double c[] = {0.5, altitude(i + 0.5, j + 0.5), 0.5};
             Double u[] = {a[0] - b[0], a[1] - b[1], a[2] - b[2]};
             Double v[] = {b[0] - c[0], b[1] - c[1], b[2] - c[2]};
 

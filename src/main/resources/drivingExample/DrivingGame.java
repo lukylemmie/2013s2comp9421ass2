@@ -120,8 +120,8 @@ public class DrivingGame extends JFrame implements GLEventListener {
         if (rightHeld) horizontalRotationDown();
         if (wHeld) zPosUp();
         if (sHeld) zPosDown();
-        if (aHeld) xPosDown();
-        if (dHeld) xPosUp();
+        if (aHeld) xPosUp();
+        if (dHeld) xPosDown();
         if (qHeld) yPosUp();
         if (eHeld) yPosDown();
         gl.glTranslated(xPos, yPos, -CAMERA_DIST + zPos);

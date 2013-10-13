@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * COMMENT: Comment HeightMap 
+ * COMMENT: Comment HeightMap
  *
  * @author malcolmr
  */
@@ -34,7 +34,7 @@ public class Terrain {
 
     //
     @Deprecated
-    public Terrain(double[][] altitudeSet){
+    public Terrain(double[][] altitudeSet) {
         mySize = new Dimension(altitudeSet.length, altitudeSet[0].length);
         myAltitude = altitudeSet.clone();
         myTrees = new ArrayList<Tree>();
@@ -62,10 +62,10 @@ public class Terrain {
     }
 
     /**
-     * Set the sunlight direction. 
-     * 
+     * Set the sunlight direction.
+     * <p/>
      * Note: the sun should be treated as a directional light, without a position
-     * 
+     *
      * @param dx
      * @param dy
      * @param dz
@@ -73,12 +73,12 @@ public class Terrain {
     public void setSunlightDir(float dx, float dy, float dz) {
         mySunlight[0] = dx;
         mySunlight[1] = dy;
-        mySunlight[2] = dz;        
+        mySunlight[2] = dz;
     }
-    
+
     /**
-     * Resize the terrain, copying any old altitudes. 
-     * 
+     * Resize the terrain, copying any old altitudes.
+     *
      * @param width
      * @param height
      */
@@ -86,7 +86,7 @@ public class Terrain {
         mySize = new Dimension(width, height);
         double[][] oldAlt = myAltitude;
         myAltitude = new double[width][height];
-        
+
         for (int i = 0; i < width && i < oldAlt.length; i++) {
             for (int j = 0; j < height && j < oldAlt[i].length; j++) {
                 myAltitude[i][j] = oldAlt[i][j];
@@ -96,7 +96,7 @@ public class Terrain {
 
     /**
      * Get the altitude at a grid point
-     * 
+     *
      * @param x
      * @param z
      * @return
@@ -107,7 +107,7 @@ public class Terrain {
 
     /**
      * Set the altitude at a grid point
-     * 
+     *
      * @param x
      * @param z
      * @return
@@ -117,11 +117,11 @@ public class Terrain {
     }
 
     /**
-     * Get the altitude at an arbitrary point. 
+     * Get the altitude at an arbitrary point.
      * Non-integer points should be interpolated from neighbouring grid points
-     * 
+     * <p/>
      * TO BE COMPLETED
-     * 
+     *
      * @param x
      * @param z
      * @return
@@ -154,7 +154,7 @@ public class Terrain {
         altitude = interpolate(altitudeX1X2Z1, altitudeX1X2Z2, dz);
 
         //fix rounding errors
-        altitude = cleanNumberTo10dp(altitude);
+        altitude = MathUtil.cleanNumberTo10dp(altitude);
 
         return altitude;
     }
@@ -162,14 +162,14 @@ public class Terrain {
     //@param x is the first value
     //@param y is the second value
     //@param t is the weighting between the points
-    public double interpolate(double x, double y, double t){
+    public double interpolate(double x, double y, double t) {
         return ((1 - t) * x + t * y);
     }
 
     /**
-     * Add a tree at the specified (x,z) point. 
+     * Add a tree at the specified (x,z) point.
      * The tree's y coordinate is calculated from the altitude of the terrain at that point.
-     * 
+     *
      * @param x
      * @param z
      */
@@ -181,18 +181,15 @@ public class Terrain {
 
 
     /**
-     * Add a road. 
-     * 
+     * Add a road.
+     *
      * @param width
      * @param spine
      */
     public void addRoad(double width, double[] spine) {
         Road road = new Road(width, spine);
-        myRoads.add(road);        
+        myRoads.add(road);
     }
 
-    public static double cleanNumberTo10dp(double x){
-        x = Math.round(x * (1e10)) / 1e10;
-        return x;
-    }
+
 }

@@ -1,5 +1,6 @@
 package ass2.spec;
 
+import javax.media.opengl.GL2;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,5 +192,7 @@ public class Terrain {
         myRoads.add(road);
     }
 
+    public void draw(GL2 gl) {
 
+    }
 }

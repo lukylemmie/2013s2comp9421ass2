@@ -1,4 +1,6 @@
-package drivingExample;
+package ass2.spec;
+
+import drivingExample.DrivingGame;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

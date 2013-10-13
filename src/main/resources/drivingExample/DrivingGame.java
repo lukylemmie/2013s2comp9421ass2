@@ -1,5 +1,6 @@
 package drivingExample;
 
+import ass2.spec.MyKeyboard;
 import ass2.spec.Tree;
 import com.jogamp.opengl.util.FPSAnimator;
 

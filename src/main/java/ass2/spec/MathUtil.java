@@ -13,14 +13,14 @@ import java.util.logging.Logger;
 public class MathUtil {
     private static Logger logger = Logger.getLogger(MathUtil.class.getName());
 
-    public static ArrayList<Double> crossProduct(ArrayList<Double> u, ArrayList<Double> v) {
-        ArrayList<Double> s = new ArrayList<Double>();
+    public static double[] crossProduct(double[] u, double[] v) {
+        double[] s = new double[3];
 
         logger.info("u[] = " + u.toString());
         logger.info("v[] = " + v.toString());
-        s.add(u.get(1) * v.get(2) - u.get(2) * v.get(1));
-        s.add(u.get(2) * v.get(0) - u.get(0) * v.get(2));
-        s.add(u.get(0) * v.get(1) - u.get(1) * v.get(0));
+        s[0] = u[1] * v[2] - u[2] * v[1];
+        s[1] = u[2] * v[0] - u[0] * v[2];
+        s[2] = u[0] * v[1] - u[1] * v[0];
         logger.info("s[] = " + s.toString());
 
         return s;
@@ -29,5 +29,12 @@ public class MathUtil {
     public static double cleanNumberTo10dp(double x) {
         x = Math.round(x * (1e10)) / 1e10;
         return x;
+    }
+
+    //@param x is the first value
+    //@param y is the second value
+    //@param t is the weighting between the points
+    public static double interpolate(double x, double y, double t) {
+        return ((1 - t) * x + t * y);
     }
 }

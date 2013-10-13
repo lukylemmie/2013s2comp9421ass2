@@ -14,37 +14,37 @@ import java.util.logging.Logger;
  * To change this template use File | Settings | File Templates.
  */
 public class MyKeyboard implements KeyListener {
-    DrivingGame drivingGame;
+    MyCamera myCamera;
     static Logger logger = Logger.getLogger(MyKeyboard.class.getName());
 
-    public MyKeyboard(DrivingGame drivingGame) {
-        this.drivingGame = drivingGame;
+    public MyKeyboard(MyCamera myCamera) {
+        this.myCamera = myCamera;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("w")) {
-            drivingGame.setwHeld(true);
+            myCamera.setwHeld(true);
             logger.info("w typed detected");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("s")) {
-            drivingGame.setsHeld(true);
+            myCamera.setsHeld(true);
             logger.info("s typed detected");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("a")) {
-            drivingGame.setaHeld(true);
+            myCamera.setaHeld(true);
             logger.info("a typed detected");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("d")) {
-            drivingGame.setdHeld(true);
+            myCamera.setdHeld(true);
             logger.info("d typed detected");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("q")) {
-            drivingGame.setqHeld(true);
+            myCamera.setqHeld(true);
             logger.info("q typed detected");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("e")) {
-            drivingGame.seteHeld(true);
+            myCamera.seteHeld(true);
             logger.info("e typed detected");
         }
     }
@@ -52,19 +52,19 @@ public class MyKeyboard implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Left")) {
-            drivingGame.setLeftHeld(true);
+            myCamera.setLeftHeld(true);
             logger.info("Left press detected");
         }
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Right")) {
-            drivingGame.setRightHeld(true);
+            myCamera.setRightHeld(true);
             logger.info("Right press detected");
         }
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Up")) {
-            drivingGame.setUpHeld(true);
+            myCamera.setUpHeld(true);
             logger.info("Up press detected");
         }
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Down")) {
-            drivingGame.setDownHeld(true);
+            myCamera.setDownHeld(true);
             logger.info("Down press detected");
         }
     }
@@ -72,43 +72,43 @@ public class MyKeyboard implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Left")) {
-            drivingGame.setLeftHeld(false);
+            myCamera.setLeftHeld(false);
             logger.info("Left press released");
         }
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Right")) {
-            drivingGame.setRightHeld(false);
+            myCamera.setRightHeld(false);
             logger.info("Right press released");
         }
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Up")) {
-            drivingGame.setUpHeld(false);
+            myCamera.setUpHeld(false);
             logger.info("Up press released");
         }
         if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Down")) {
-            drivingGame.setDownHeld(false);
+            myCamera.setDownHeld(false);
             logger.info("Down press released");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("w")) {
-            drivingGame.setwHeld(false);
+            myCamera.setwHeld(false);
             logger.info("w typed released");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("s")) {
-            drivingGame.setsHeld(false);
+            myCamera.setsHeld(false);
             logger.info("s typed released");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("a")) {
-            drivingGame.setaHeld(false);
+            myCamera.setaHeld(false);
             logger.info("a typed released");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("d")) {
-            drivingGame.setdHeld(false);
+            myCamera.setdHeld(false);
             logger.info("d typed released");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("q")) {
-            drivingGame.setqHeld(false);
+            myCamera.setqHeld(false);
             logger.info("q typed released");
         }
         if (Character.toString(e.getKeyChar()).equalsIgnoreCase("e")) {
-            drivingGame.seteHeld(false);
+            myCamera.seteHeld(false);
             logger.info("e typed released");
         }
     }

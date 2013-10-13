@@ -118,16 +118,12 @@ public class Tree {
                 double x1 = Math.cos(a1) * 2;
                 double y1 = Math.sin(a1) * 2;
 
-                Double u[] = {x0, y0, 4d};
-                Double v[] = {x1, y1, 4d};
+                double u[] = {x0, y0, 4d};
+                double v[] = {x1, y1, 4d};
 
-                ArrayList<Double> U = new ArrayList<Double>();
-                U.addAll(Arrays.asList(u));
-                ArrayList<Double> V = new ArrayList<Double>();
-                V.addAll(Arrays.asList(v));
-                ArrayList<Double> s = MathUtil.crossProduct(V, U);
+                double[] s = MathUtil.crossProduct(v, u);
 
-                gl.glNormal3d(s.get(0), s.get(1), s.get(2));
+                gl.glNormal3d(s[0], s[1], s[2]);
                 gl.glVertex3d(0, 0, 0);
                 gl.glVertex3d(x0, y0, 3);
                 gl.glVertex3d(x1, y1, 3);
@@ -149,16 +145,11 @@ public class Tree {
                 double x1 = Math.cos(a1) * 2;
                 double y1 = Math.sin(a1) * 2;
 
-                Double u[] = {x0, y0, 4d};
-                Double v[] = {x1, y1, 4d};
+                double u[] = {x0, y0, 4d};
+                double v[] = {x1, y1, 4d};
+                double s[] = MathUtil.crossProduct(v, u);
 
-                ArrayList<Double> U = new ArrayList<Double>();
-                U.addAll(Arrays.asList(u));
-                ArrayList<Double> V = new ArrayList<Double>();
-                V.addAll(Arrays.asList(v));
-                ArrayList<Double> s = MathUtil.crossProduct(V, U);
-
-                gl.glNormal3d(s.get(0), s.get(1), s.get(2));
+                gl.glNormal3d(s[0], s[1], s[2]);
                 gl.glVertex3d(0, 0, 0);
                 gl.glVertex3d(x0, y0, 3);
                 gl.glVertex3d(x1, y1, 3);
@@ -180,16 +171,11 @@ public class Tree {
                 double x1 = Math.cos(a1) * 2;
                 double y1 = Math.sin(a1) * 2;
 
-                Double u[] = {x0, y0, 4d};
-                Double v[] = {x1, y1, 4d};
+                double u[] = {x0, y0, 4d};
+                double v[] = {x1, y1, 4d};
+                double[] s = MathUtil.crossProduct(v, u);
 
-                ArrayList<Double> U = new ArrayList<Double>();
-                U.addAll(Arrays.asList(u));
-                ArrayList<Double> V = new ArrayList<Double>();
-                V.addAll(Arrays.asList(v));
-                ArrayList<Double> s = MathUtil.crossProduct(V, U);
-
-                gl.glNormal3d(s.get(0), s.get(1), s.get(2));
+                gl.glNormal3d(s[0], s[1], s[2]);
                 gl.glVertex3d(0, 0, 0);
                 gl.glVertex3d(x0, y0, 3);
                 gl.glVertex3d(x1, y1, 3);

@@ -105,23 +105,6 @@ public class Tree {
 
         gl.glBegin(GL2.GL_TRIANGLE_FAN);
         {
-            gl.glNormal3d(0, 0, -1);
-            gl.glVertex3d(0, 0, 0);
-
-            //top of cylinder
-            double angleStep = 2 * Math.PI / CIRCLE_STEPS;
-            for (int i = 0; i < CIRCLE_STEPS + 1; i++) {
-                double x = Math.cos(i * angleStep) * 0.5;
-                double y = Math.sin(i * angleStep) * 0.5;
-
-                gl.glVertex3d(x, y, 0);
-            }
-            gl.glVertex3d(1, 0, 0);
-        }
-        gl.glEnd();
-
-        gl.glBegin(GL2.GL_TRIANGLE_FAN);
-        {
             gl.glNormal3d(0, 0, 1);
             gl.glVertex3d(0, 0, 1);
 
@@ -151,12 +134,12 @@ public class Tree {
                 double y1 = Math.sin(a1);
 
                 gl.glNormal3d(x0, y0, 0);
-                gl.glVertex3d(x0, y0, 0);
+                gl.glVertex3d(0, 0, 0);
                 gl.glVertex3d(x0, y0, 4);
 
                 gl.glNormal3d(x1, y1, 0);
                 gl.glVertex3d(x1, y1, 4);
-                gl.glVertex3d(x1, y1, 0);
+                gl.glVertex3d(0, 0, 0);
             }
         }
         gl.glEnd();

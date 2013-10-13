@@ -32,11 +32,11 @@ public class DrivingGame extends JFrame implements GLEventListener {
             };
     private static final double[][] altitudeSet2 = new double[][]
             {
-                    {0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0},
-                    {0, 0, 1, 0, 0},
-                    {0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0}
+                    {0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0},
+                    {0, 0, 1, 1, 0, 0},
+                    {0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0}
             };
     private static final double[][] altitudeSet3 = new double[][]
             {

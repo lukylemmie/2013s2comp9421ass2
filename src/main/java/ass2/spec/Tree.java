@@ -102,7 +102,7 @@ public class Tree {
         gl.glRotated(90, 1, 0, 0);
         gl.glTranslated(0, 0, -4);
 
-        float[] difColor = {0f, 0.10f, 0f, 1};
+        float[] difColor = {0f, 0.05f, 0f, 1};
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
 
         gl.glBegin(GL2.GL_TRIANGLES);
@@ -198,7 +198,6 @@ public class Tree {
         gl.glEnd();
 
         gl.glPopMatrix();
-
     }
 
     public void draw(GL2 gl) {

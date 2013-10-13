@@ -3,6 +3,7 @@ package ass2.spec;
 import javax.media.opengl.GL2;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -193,6 +194,49 @@ public class Terrain {
     }
 
     public void draw(GL2 gl) {
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glPushMatrix();
 
+        for (int i = 0; i < myAltitude.length - 1; i++) {
+            for (int j = 0; j < myAltitude[i].length - 1; j++) {
+                drawSection(gl, i, j);
+            }
+        }
+
+
+        gl.glPopMatrix();
+    }
+
+    private void drawSection(GL2 gl, int i, int j) {
+        gl.glPushMatrix();
+
+        gl.glTranslated(i, 0, j);
+
+        float[] difColor = {0f, 0.7f, 0f, 1};
+
+        gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
+
+        gl.glBegin(GL2.GL_TRIANGLES);
+        {
+            Double a[] = {Double.valueOf(i), myAltitude[i][j], Double.valueOf(j)};
+            Double b[] = {i + 1d, myAltitude[i + 1][j + 1], j + 1d};
+            Double c[] = {i + 0.5, altitude(i + 0.5, j + 0.5), j + 0.5};
+            Double u[] = {a[0] - b[0], a[1] - b[1], a[2] - b[2]};
+            Double v[] = {b[0] - c[0], b[1] - c[1], b[2] - c[2]};
+
+            ArrayList<Double> U = new ArrayList<Double>();
+            U.addAll(Arrays.asList(u));
+            ArrayList<Double> V = new ArrayList<Double>();
+            V.addAll(Arrays.asList(v));
+            ArrayList<Double> s = MathUtil.crossProduct(V, U);
+
+            gl.glNormal3d(s.get(0), s.get(1), s.get(2));
+            gl.glVertex3d(a[0], a[1], a[2]);
+            gl.glVertex3d(b[0], b[1], b[2]);
+            gl.glVertex3d(c[0], c[1], c[2]);
+        }
+        gl.glEnd();
+
+        gl.glPopMatrix();
     }
 }

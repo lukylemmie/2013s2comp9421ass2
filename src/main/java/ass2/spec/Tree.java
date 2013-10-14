@@ -190,6 +190,7 @@ public class Tree {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPushMatrix();
         gl.glTranslated(myPos[0], myPos[1], myPos[2]);
+        gl.glScalef(0.5f, 0.5f, 0.5f);
 
         drawTrunk(gl);
         drawTreeTop(gl);

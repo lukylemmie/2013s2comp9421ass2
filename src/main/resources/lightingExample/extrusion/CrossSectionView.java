@@ -8,7 +8,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
 /**
- * A simple 2D view of the cross-section 
+ * A simple 2D view of the cross-section
  *
  * @author malcolmr
  */
@@ -44,17 +44,18 @@ public class CrossSectionView implements GLEventListener {
             gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
             crossSection.draw(gl);
         }
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
-        
+                        int height) {
+
         GL2 gl = drawable.getGL().getGL2();
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        
+
         gl.glOrtho(-2, 2, -2, 2, -2, 2);
 
     }

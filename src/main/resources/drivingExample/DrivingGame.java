@@ -54,7 +54,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
             };
     //    private Car myCar;
     private Terrain myTerrain;
-    //    private Tree myTree;
+    private Tree myTree;
     private Floor myFloor;
     private MyCamera myCamera;
 
@@ -63,7 +63,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
 
         myTerrain = new Terrain(altitudeSet2);
         myFloor = new Floor(10, 10);
-//        myTree = new Tree(0, 0, 0);
+        myTree = new Tree(0, 0, 0);
 //        myCar = new Car();
         myCamera = new MyCamera();
     }
@@ -94,6 +94,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
     @Override
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
+        float[] mySunlight = myTerrain.getSunlight();
 
         gl.glEnable(GL2.GL_DEPTH_TEST);
         gl.glEnable(GL2.GL_LIGHTING);
@@ -108,21 +109,11 @@ public class DrivingGame extends JFrame implements GLEventListener {
     public void display(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
 
-        gl.glClearColor(0.4f, 0.4f, 1, 1);
-        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
-
-        gl.glMatrixMode(GL2.GL_MODELVIEW);
-        gl.glLoadIdentity();
-
-//        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
-        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
-        gl.glColor4d(0, 0, 0, 1);
-
         myCamera.setCamera(gl);
 
         myFloor.draw(gl);
 //        myCar.draw(gl);
-//        myTree.draw(gl);
+        myTree.draw(gl);
         myTerrain.draw(gl);
     }
 

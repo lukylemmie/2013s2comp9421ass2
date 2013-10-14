@@ -31,6 +31,16 @@ public class MyCamera {
     }
 
     public void setCamera(GL2 gl) {
+        gl.glClearColor(0.4f, 0.4f, 1, 1);
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glLoadIdentity();
+
+//        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+        gl.glColor4d(0, 0, 0, 1);
+
         if (upHeld) verticalRotationDown();
         if (downHeld) verticalRotationUp();
         if (leftHeld) horizontalRotationDown();

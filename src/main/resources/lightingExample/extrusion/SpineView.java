@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 /**
- * A simple 2D view of the spine 
+ * A simple 2D view of the spine
  *
  * @author malcolmr
  */
@@ -56,24 +56,25 @@ public class SpineView implements GLEventListener, MouseMotionListener {
             }
             gl.glEnd();
         }
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
+                        int height) {
 
         GL2 gl = drawable.getGL().getGL2();
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        
+
         gl.glOrtho(-2, 2, -2, 2, -4, 4);
 
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        myMousePoint = e.getPoint();        
+        myMousePoint = e.getPoint();
     }
 
     @Override
@@ -93,5 +94,5 @@ public class SpineView implements GLEventListener, MouseMotionListener {
         myMousePoint = p;
     }
 
-    
+
 }

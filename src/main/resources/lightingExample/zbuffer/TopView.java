@@ -13,11 +13,11 @@ import javax.media.opengl.GLEventListener;
 import lightingExample.Polygon;
 
 /**
- * Simple top-down view 
+ * Simple top-down view
  *
  * @author malcolmr
  */
-public class TopView  implements GLEventListener {
+public class TopView implements GLEventListener {
 
     private ZBufferExample myModel;
 
@@ -55,25 +55,24 @@ public class TopView  implements GLEventListener {
         gl.glLoadIdentity();
         gl.glRotated(90, 1, 0, 0);
         gl.glTranslated(0, 0, 4);
-        
+
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
         gl.glLineWidth(4);
-        
+
         for (Polygon p : myModel.getPolygons()) {
             p.draw(gl);
         }
         gl.glFlush();
-        
+
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
+                        int height) {
         // TODO Auto-generated method stub
-        
+
     }
 
 
-
-    
 }

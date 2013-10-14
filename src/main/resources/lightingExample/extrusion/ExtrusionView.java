@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 /**
- * COMMENT: Comment CrossSectionView 
+ * COMMENT: Comment CrossSectionView
  *
  * @author malcolmr
  */
@@ -34,10 +34,10 @@ public class ExtrusionView implements GLEventListener, MouseMotionListener {
 
         // enable depth testing
         gl.glEnable(GL.GL_DEPTH_TEST);
-        
+
         // enable lighting
         gl.glEnable(GL2.GL_LIGHTING);
-        
+
         // normalise normals (!)
         // this is necessary to make lighting work properly
         gl.glEnable(GL2.GL_NORMALIZE);
@@ -57,7 +57,7 @@ public class ExtrusionView implements GLEventListener, MouseMotionListener {
 
         // turn on a light
         gl.glEnable(GL2.GL_LIGHT0);
-       
+
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
         gl.glRotated(myRotateX, 1, 0, 0);
@@ -68,29 +68,30 @@ public class ExtrusionView implements GLEventListener, MouseMotionListener {
         if (mesh != null) {
             gl.glColor4d(0, 0, 0, 1);
             gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
-            
+
             for (Polygon p : mesh) {
-                p.draw(gl);                
+                p.draw(gl);
             }
         }
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
-        
+                        int height) {
+
         GL2 gl = drawable.getGL().getGL2();
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        
+
         gl.glOrtho(-3, 3, -3, 3, -4, 4);
 
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        myMousePoint = e.getPoint();        
+        myMousePoint = e.getPoint();
     }
 
     @Override
@@ -110,5 +111,5 @@ public class ExtrusionView implements GLEventListener, MouseMotionListener {
         myMousePoint = p;
     }
 
-    
+
 }

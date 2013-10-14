@@ -17,7 +17,7 @@ import javax.media.opengl.glu.GLU;
 import lightingExample.Polygon;
 
 /**
- * 3D view with ZBuffer display 
+ * 3D view with ZBuffer display
  *
  * @author malcolmr
  */
@@ -34,7 +34,7 @@ public class MainView implements GLEventListener, MouseMotionListener, KeyListen
     private boolean myShowDepth = false;
     private int myWidth;
     private int myHeight;
-    
+
     public MainView(ZBufferExample model) {
         myModel = model;
     }
@@ -62,9 +62,8 @@ public class MainView implements GLEventListener, MouseMotionListener, KeyListen
 
         if (myPerspective) {
             GLU glu = new GLU();
-            glu.gluPerspective(60, 1, 1, 8);            
-        }
-        else {
+            glu.gluPerspective(60, 1, 1, 8);
+        } else {
             gl.glOrtho(-3, 3, -3, 3, 1, 8);
         }
 
@@ -76,14 +75,13 @@ public class MainView implements GLEventListener, MouseMotionListener, KeyListen
         gl.glLoadIdentity();
         gl.glRotated(myRotateX, 1, 0, 0);
         gl.glRotated(myRotateY, 0, 1, 0);
-        
+
         // draw the polygons
-        
+
         if (myWireframe) {
             gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
-        }
-        else {
-            gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);            
+        } else {
+            gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
         }
 
         for (Polygon p : myModel.getPolygons()) {
@@ -93,18 +91,19 @@ public class MainView implements GLEventListener, MouseMotionListener, KeyListen
 
         // if the show-depth flag is on, copy the depth-buffer
         // onto the screen as luminance, so depths are displayed as levels of grey
-        
+
         if (myShowDepth) {
             Buffer pixels = FloatBuffer.allocate(myWidth * myHeight);
-            gl.glReadPixels(0, 0, myWidth, myHeight, GL2.GL_DEPTH_COMPONENT, GL2.GL_FLOAT, pixels );
+            gl.glReadPixels(0, 0, myWidth, myHeight, GL2.GL_DEPTH_COMPONENT, GL2.GL_FLOAT, pixels);
             gl.glDrawPixels(myWidth, myHeight, GL2.GL_LUMINANCE, GL2.GL_FLOAT, pixels);
         }
-        
+
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
+                        int height) {
 
         GL2 gl = drawable.getGL().getGL2();
 
@@ -145,19 +144,19 @@ public class MainView implements GLEventListener, MouseMotionListener, KeyListen
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
-        case KeyEvent.VK_W:
-            myWireframe = !myWireframe;
-            break;
-            
-        case KeyEvent.VK_P:
-            myPerspective = !myPerspective;
-            break;
-            
-        case KeyEvent.VK_Z:
-            myShowDepth  = !myShowDepth;
-            break;
+            case KeyEvent.VK_W:
+                myWireframe = !myWireframe;
+                break;
+
+            case KeyEvent.VK_P:
+                myPerspective = !myPerspective;
+                break;
+
+            case KeyEvent.VK_Z:
+                myShowDepth = !myShowDepth;
+                break;
         }
     }
 
-    
+
 }

@@ -51,7 +51,7 @@ public class MyKeyboard implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("Left")) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             myCamera.setLeftHeld(true);
             logger.info("Left press detected");
         }

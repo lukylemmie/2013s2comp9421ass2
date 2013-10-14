@@ -190,6 +190,9 @@ public class Terrain {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPushMatrix();
 
+//        float[] pos = {mySunlight[0], mySunlight[1], mySunlight[2], 1f};
+//        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, pos, 0);
+
         for (int i = 0; i < myAltitude.length - 1; i++) {
             for (int j = 0; j < myAltitude[i].length - 1; j++) {
                 drawSection1(gl, i, j);

@@ -15,7 +15,7 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import lightingExample.Polygon;
 
 /**
- * COMMENT: Comment CrossSectionView 
+ * COMMENT: Comment CrossSectionView
  *
  * @author malcolmr
  */
@@ -70,18 +70,19 @@ public class LightingView implements GLEventListener, MouseMotionListener {
         gl.glLoadIdentity();
 
         // set the lights
-        
+
         setLighting(gl);
 
         // rotate the camera 
-        
+
         gl.glRotated(myRotateCameraX, 1, 0, 0);
         gl.glRotated(myRotateCameraY, 0, 1, 0);
 
         // draw the shape
-        
+
         drawShape(gl);
 
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
 
     private void drawShape(GL2 gl) {
@@ -92,44 +93,44 @@ public class LightingView implements GLEventListener, MouseMotionListener {
         // Set the reflection coefficients all to 1
         // Normally these values would be tuned to get a particular appearance
 
-        float[] rhoA = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-        float[] rhoD = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-        float[] rhoS = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
+        float[] rhoA = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
+        float[] rhoD = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
+        float[] rhoS = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT, rhoA, 0);
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, rhoD, 0);
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, rhoS, 0);
 
         // Set the shininess (i.e. the Phong exponent)
-        
+
         int phong = myModel.getPhong();
         gl.glMaterialf(GL2.GL_FRONT, GL2.GL_SHININESS, phong);
 
         // Draw the model
-        
+
         gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
         switch (myModel.getModel()) {
 
-        case TEAPOT:
-            // the builtin teapot is back-to-front
-            // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/glutSolidTeapot.3.html
-            gl.glFrontFace(GL2.GL_CW);
-            glut.glutSolidTeapot(1);
-            gl.glFrontFace(GL2.GL_CCW);
-            break;
+            case TEAPOT:
+                // the builtin teapot is back-to-front
+                // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/glutSolidTeapot.3.html
+                gl.glFrontFace(GL2.GL_CW);
+                glut.glutSolidTeapot(1);
+                gl.glFrontFace(GL2.GL_CCW);
+                break;
 
-        case CUBE:
-            glut.glutSolidCube(1);
-            break;
+            case CUBE:
+                glut.glutSolidCube(1);
+                break;
 
-        case SPHERE:
-            glut.glutSolidSphere(1, 20, 20);
-            break;
+            case SPHERE:
+                glut.glutSolidSphere(1, 20, 20);
+                break;
 
-        case TORUS:
-            glut.glutSolidTorus(0.5, 1.5, 20, 20);
-            break;
+            case TORUS:
+                glut.glutSolidTorus(0.5, 1.5, 20, 20);
+                break;
 
         }
     }
@@ -143,10 +144,10 @@ public class LightingView implements GLEventListener, MouseMotionListener {
         gl.glRotated(myRotateLightX, 1, 0, 0);
         gl.glRotated(myRotateLightY, 0, 1, 0);
 
-        float[] pos = new float[] { 0.0f, 0.0f, 4.0f, 1.0f };
+        float[] pos = new float[]{0.0f, 0.0f, 4.0f, 1.0f};
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, pos, 0);
         gl.glPopMatrix();
-        
+
         // set the intensities
 
         float ambient = myModel.getAmbient();
@@ -171,7 +172,7 @@ public class LightingView implements GLEventListener, MouseMotionListener {
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
+                        int height) {
 
         GL2 gl = drawable.getGL().getGL2();
 
@@ -204,8 +205,7 @@ public class LightingView implements GLEventListener, MouseMotionListener {
                 // button 1 moves the camera
                 myRotateCameraY += dx * ROTATION_SCALE;
                 myRotateCameraX += dy * ROTATION_SCALE;
-            }
-            else {
+            } else {
                 // other buttons move the light
                 myRotateLightY += dx * ROTATION_SCALE;
                 myRotateLightX += dy * ROTATION_SCALE;

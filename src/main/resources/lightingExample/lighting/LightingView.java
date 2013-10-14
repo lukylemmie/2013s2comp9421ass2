@@ -149,7 +149,6 @@ public class LightingView implements GLEventListener, MouseMotionListener {
         gl.glPopMatrix();
 
         // set the intensities
-
         float ambient = myModel.getAmbient();
         float diffuse = myModel.getDiffuse();
         float specular = myModel.getSpecular();

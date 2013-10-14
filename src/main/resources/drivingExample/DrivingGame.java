@@ -94,7 +94,6 @@ public class DrivingGame extends JFrame implements GLEventListener {
     @Override
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
-        float[] mySunlight = myTerrain.getSunlight();
 
         gl.glEnable(GL2.GL_DEPTH_TEST);
         gl.glEnable(GL2.GL_LIGHTING);

@@ -41,6 +41,10 @@ public class Terrain {
         myAltitude = altitudeSet.clone();
         myTrees = new ArrayList<Tree>();
         myRoads = new ArrayList<Road>();
+        mySunlight = new float[3];
+        mySunlight[0] = 2f;
+        mySunlight[1] = 2f;
+        mySunlight[2] = 2f;
     }
 
     public Terrain(Dimension size) {
@@ -190,8 +194,15 @@ public class Terrain {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPushMatrix();
 
-//        float[] pos = {mySunlight[0], mySunlight[1], mySunlight[2], 1f};
-//        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, pos, 0);
+        float[] pos = {mySunlight[0], mySunlight[1], mySunlight[2], 1f};
+        float[] a = {1.0f, 1.0f, 1.0f, 1f};
+        float[] d = {1.0f, 1.0f, 1.0f, 1f};
+        float[] s = {1.0f, 1.0f, 1.0f, 1f};
+
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, pos, 0);
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, a, 0);
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, d, 0);
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, s, 0);
 
         for (int i = 0; i < myAltitude.length - 1; i++) {
             for (int j = 0; j < myAltitude[i].length - 1; j++) {

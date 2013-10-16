@@ -15,15 +15,15 @@ import java.util.*;
 import java.util.List;
 
 /**
- * An example of Mesh exrusions for COMP3421 
- * 
+ * An example of Mesh exrusions for COMP3421
+ *
  * @author malcolmr
  */
 public class ExtrusionExample extends JFrame implements ItemListener {
 
     // how much the cross-section is scaled before extrusion
     private static final double SCALE = 0.5;
-    
+
     // UI components
     private GLJPanel[] myPanels;
     private ButtonGroup myCrossSectionSelection;
@@ -93,7 +93,6 @@ public class ExtrusionExample extends JFrame implements ItemListener {
 
     /**
      * Create menus to selct cross-section and spine
-     *
      */
     private void initMenus() {
         JMenuBar menuBar = new JMenuBar();
@@ -127,55 +126,71 @@ public class ExtrusionExample extends JFrame implements ItemListener {
 
     /**
      * Create available cross-sections
-     *
      */
     private void initCrossSections() {
         myCrossSections = new LinkedHashMap<String, Polygon>();
 
         // An isosceles triangle
-        
+
         Polygon triangle = new Polygon();
-        triangle.addPoint(SCALE, 0, 0);
-        triangle.addPoint(-SCALE, 0.5 * SCALE, 0);
-        triangle.addPoint(-SCALE, -0.5 * SCALE, 0);
+        triangle.addPoint(1 * SCALE, 0, 0);
+        triangle.addPoint(-1 * SCALE, 0.5 * SCALE, 0);
+        triangle.addPoint(-1 * SCALE, -0.5 * SCALE, 0);
         myCrossSections.put("Triangle", triangle);
 
         // A square
-        
+
         Polygon square = new Polygon();
-        square.addPoint(SCALE, SCALE, 0);
-        square.addPoint(-SCALE, SCALE, 0);
-        square.addPoint(-SCALE, -SCALE, 0);
-        square.addPoint(SCALE, -SCALE, 0);
+        square.addPoint(2 * SCALE, 2 * SCALE, 0);
+        square.addPoint(-2 * SCALE, 2 * SCALE, 0);
+        square.addPoint(-2 * SCALE, -2 * SCALE, 0);
+        square.addPoint(2 * SCALE, -2 * SCALE, 0);
         myCrossSections.put("Square", square);
 
         // A cicle
-        
+
         Polygon circle = new Polygon();
         for (int i = 0; i < 16; i++) {
             double a = Math.PI * 2 * i / 16;
-            circle.addPoint(SCALE* Math.cos(a), SCALE* Math.sin(a), 0);
+            circle.addPoint(SCALE * Math.cos(a), SCALE * Math.sin(a), 0);
         }
         myCrossSections.put("Circle", circle);
-        
+
+
+        // A rectangle
+
+        Polygon rectangle = new Polygon();
+        rectangle.addPoint(3 * SCALE, 0.25 * SCALE, 0);
+        rectangle.addPoint(-3 * SCALE, 0.25 * SCALE, 0);
+        rectangle.addPoint(-3 * SCALE, 0.5 * SCALE, 0);
+        rectangle.addPoint(-3.5 * SCALE, 0.5 * SCALE, 0);
+        rectangle.addPoint(-3.5 * SCALE, -0.5 * SCALE, 0);
+        rectangle.addPoint(-3 * SCALE, -0.5 * SCALE, 0);
+        rectangle.addPoint(-3 * SCALE, -0.25 * SCALE, 0);
+        rectangle.addPoint(3 * SCALE, -0.25 * SCALE, 0);
+        rectangle.addPoint(3 * SCALE, -0.5 * SCALE, 0);
+        rectangle.addPoint(3.5 * SCALE, -0.5 * SCALE, 0);
+        rectangle.addPoint(3.5 * SCALE, 0.5 * SCALE, 0);
+        rectangle.addPoint(3 * SCALE, 0.5 * SCALE, 0);
+        myCrossSections.put("Rectangle", rectangle);
+
     }
 
     /**
      * Create available spines
-     *
      */
     private void initSpines() {
         mySpines = new LinkedHashMap<String, List<Point>>();
 
         // a simple line segment
-        
+
         List<Point> line = new ArrayList<Point>();
         line.add(new Point(-1, 0, 0));
         line.add(new Point(1, 0, 0));
         mySpines.put("Line", line);
-        
+
         // three sides of a square
-        
+
         List<Point> square = new ArrayList<Point>();
         square.add(new Point(1, 1, 0));
         square.add(new Point(-1, 1, 0));
@@ -184,7 +199,7 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         mySpines.put("Square", square);
 
         // a semi-circle
-        
+
         List<Point> semicircle = new ArrayList<Point>();
         for (int i = 0; i <= 16; i++) {
             double a = Math.PI * i / 16;
@@ -193,7 +208,7 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         mySpines.put("Semicircle", semicircle);
 
         // a sine wave
-        
+
         List<Point> sine = new ArrayList<Point>();
         for (int i = 0; i <= 64; i++) {
             double a = Math.PI * i / 32;
@@ -202,7 +217,7 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         mySpines.put("Sine wave", sine);
 
         // a helix
-        
+
         List<Point> helix = new ArrayList<Point>();
         for (int i = 0; i <= 128; i++) {
             double a = Math.PI * i / 16;
@@ -214,7 +229,7 @@ public class ExtrusionExample extends JFrame implements ItemListener {
 
     /**
      * Get the name of the current menu selections
-     * 
+     *
      * @param group
      * @return
      */
@@ -233,7 +248,7 @@ public class ExtrusionExample extends JFrame implements ItemListener {
 
     /**
      * Get the currently selected cross section
-     * 
+     *
      * @return
      */
     public Polygon getCrossSection() {
@@ -249,7 +264,7 @@ public class ExtrusionExample extends JFrame implements ItemListener {
 
     /**
      * Get the currently selected spine
-     * 
+     *
      * @return
      */
     public List<Point> getSpine() {
@@ -261,10 +276,10 @@ public class ExtrusionExample extends JFrame implements ItemListener {
 
         return mySpines.get(s);
     }
-    
+
     /**
      * Get the extruded mesh
-     * 
+     *
      * @return
      */
     public List<Polygon> getMesh() {
@@ -274,20 +289,19 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         }
         return myMesh;
     }
-    
+
     /**
      * The extrusion code.
-     * 
+     * <p/>
      * This method extrudes the cross section along the spine
-     *
      */
     private void computeMesh() {
-               
+
         Polygon cs = getCrossSection();
         if (cs == null) {
             return;
         }
-        
+
         List<Point> crossSection = cs.getPoints();
         List<Point> spine = getSpine();
         if (spine == null) {
@@ -297,24 +311,24 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         //
         // Step 1: create a vertex list by moving the cross section along the spine
         //
-        
+
         List<Point> vertices = new ArrayList<Point>();
 
         Point pPrev;
         Point pCurr = spine.get(0);
         Point pNext = spine.get(1);
-        
+
         // first point is a special case
         addPoints(crossSection, vertices, pCurr, pCurr, pNext);
-        
+
         // mid points
         for (int i = 1; i < spine.size() - 1; i++) {
             pPrev = pCurr;
             pCurr = pNext;
-            pNext = spine.get(i+1);
-            addPoints(crossSection, vertices, pPrev, pCurr, pNext);            
+            pNext = spine.get(i + 1);
+            addPoints(crossSection, vertices, pPrev, pCurr, pNext);
         }
-        
+
         // last point is a special case
         pPrev = pCurr;
         pCurr = pNext;
@@ -323,11 +337,11 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         // 
         // Step 2: connect points in successive cross-sections to form quads
         // 
-        
+
         myMesh = new ArrayList<Polygon>();
 
         int n = crossSection.size();
-        
+
         // for each point along the spine
         for (int i = 0; i < spine.size() - 1; i++) {
 
@@ -335,70 +349,70 @@ public class ExtrusionExample extends JFrame implements ItemListener {
             for (int j = 0; j < n; j++) {
                 // create a quad joining this point and the next one
                 // to the equivalent points in the next cross-section
-                
+
                 // note: make sure they are in anti-clockwise order
                 // so they are facing outwards
-                
-                Polygon quad = new Polygon();                
+
+                Polygon quad = new Polygon();
                 quad.addPoint(vertices.get(i * n + j));
-                quad.addPoint(vertices.get(i * n + (j+1) % n));
-                quad.addPoint(vertices.get((i+1) * n + (j+1) % n));
-                quad.addPoint(vertices.get((i+1) * n + j));
+                quad.addPoint(vertices.get(i * n + (j + 1) % n));
+                quad.addPoint(vertices.get((i + 1) * n + (j + 1) % n));
+                quad.addPoint(vertices.get((i + 1) * n + j));
                 myMesh.add(quad);
             }
-            
+
         }
-        
+
     }
 
     /**
      * Transform the points in the cross-section using the Frenet frame
      * and add them to the vertex list.
-     * 
+     *
      * @param crossSection The cross section
-     * @param vertices The vertex list
-     * @param pPrev The previous point on the spine
-     * @param pCurr The current point on the spine
-     * @param pNext The next point on the spine
+     * @param vertices     The vertex list
+     * @param pPrev        The previous point on the spine
+     * @param pCurr        The current point on the spine
+     * @param pNext        The next point on the spine
      */
     private void addPoints(List<Point> crossSection, List<Point> vertices,
-            Point pPrev, Point pCurr, Point pNext) {
+                           Point pPrev, Point pCurr, Point pNext) {
 
         // compute the Frenet frame as an affine matrix
         double[][] m = new double[4][4];
-        
+
         // phi = pCurr        
         m[0][3] = pCurr.x;
         m[1][3] = pCurr.y;
         m[2][3] = pCurr.z;
         m[3][3] = 1;
-        
+
         // k = pNext - pPrev (approximates the tangent)
         m[0][2] = pNext.x - pPrev.x;
         m[1][2] = pNext.y - pPrev.y;
         m[2][2] = pNext.z - pPrev.z;
         m[3][2] = 0;
-        
+
         // normalise k
-        double d = Math.sqrt(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);  
+        double d = Math.sqrt(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);
         m[0][2] /= d;
         m[1][2] /= d;
         m[2][2] /= d;
-        
+
         // i = simple perpendicular to k
         m[0][0] = -m[1][2];
-        m[1][0] =  m[0][2];
-        m[2][0] =  0;
-        m[3][0] =  0;
-        
+        m[1][0] = m[0][2];
+        m[2][0] = 0;
+        m[3][0] = 0;
+
         // j = k x i
         m[0][1] = m[1][2] * m[2][0] - m[2][2] * m[1][0];
         m[1][1] = m[2][2] * m[0][0] - m[0][2] * m[2][0];
         m[2][1] = m[0][2] * m[1][0] - m[1][2] * m[0][0];
-        m[3][1] =  0;
-        
+        m[3][1] = 0;
+
         // transform the points
-        
+
         for (Point cp : crossSection) {
             Point q = cp.transform(m);
             vertices.add(q);

@@ -39,11 +39,15 @@ public class DrivingGame extends JFrame implements GLEventListener {
             };
     private static final double[][] altitudeSet3 = new double[][]
             {
-                    {0, 1, 2, 1, 0},
-                    {1, 2, 3, 2, 1},
-                    {2, 3, 4, 3, 2},
-                    {1, 2, 3, 2, 1},
-                    {0, 1, 2, 1, 0}
+                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 1, 2, 1, 0, 0, 0},
+                    {0, 0, 1, 2, 3, 2, 1, 0, 0},
+                    {0, 1, 2, 3, 4, 3, 2, 1, 0},
+                    {0, 0, 1, 2, 3, 2, 1, 0, 0},
+                    {0, 0, 0, 1, 2, 1, 0, 0, 0},
+                    {0, 0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0, 0}
             };
     private static final double[][] altitudeSet5 = new double[][]
             {
@@ -61,7 +65,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
     public DrivingGame() {
         super("Driving Game!");
 
-        myTerrain = new Terrain(altitudeSet2);
+        myTerrain = new Terrain(altitudeSet3);
         myFloor = new Floor(10, 10);
         myTree = new Tree(0, 0, 0);
 //        myCar = new Car();
@@ -96,8 +100,19 @@ public class DrivingGame extends JFrame implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
 
         gl.glEnable(GL2.GL_DEPTH_TEST);
+
+        // enable lighting, turn on light 0
         gl.glEnable(GL2.GL_LIGHTING);
         gl.glEnable(GL2.GL_LIGHT0);
+
+        // normalise normals (!)
+        // this is necessary to make lighting work properly
+        gl.glEnable(GL2.GL_NORMALIZE);
+
+        // enable texturing
+        gl.glEnable(GL.GL_TEXTURE_2D);
+        myTerrain.loadTexture(gl);
+        myTree.loadTexture(gl);
     }
 
     @Override

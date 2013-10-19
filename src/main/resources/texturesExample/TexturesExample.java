@@ -17,7 +17,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 
 /**
- * COMMENT: Comment ZBuffer 
+ * COMMENT: Comment ZBuffer
  *
  * @author malcolmr
  */
@@ -29,10 +29,10 @@ public class TexturesExample extends JFrame implements KeyListener {
     private JSlider myDiffuse;
     private JSlider mySpecular;
     private JSlider myPhong;
-    
-    private Model myModel = Model.TEAPOT;
+
+    private Model myModel = Model.CUBE;
     private boolean mySmooth = false;
-    
+
     public enum Model {
         TEAPOT, CUBE, SPHERE, TORUS
     }
@@ -45,9 +45,9 @@ public class TexturesExample extends JFrame implements KeyListener {
     public Model getModel() {
         return myModel;
     }
-    
+
     public boolean isSmooth() {
-        return mySmooth ;
+        return mySmooth;
     }
 
     public float getAmbient() {
@@ -61,26 +61,26 @@ public class TexturesExample extends JFrame implements KeyListener {
     public float getSpecular() {
         return 0.1f * mySpecular.getValue();
     }
-    
+
     public int getPhong() {
         return myPhong.getValue();
     }
-    
-    
+
+
     public void init() {
         // initialisation
         GLProfile glp = GLProfile.getDefault();
         GLCapabilities caps = new GLCapabilities(glp);
 
         setSize(800, 400);
-        
+
         initPanels(caps);
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    
+
     private void initPanels(GLCapabilities caps) {
         // create a panel to draw on
         myPanels = new GLJPanel[1];
@@ -93,12 +93,12 @@ public class TexturesExample extends JFrame implements KeyListener {
         add(myPanels[0]);
         add(panel);
 
-       TextureView view1 = new TextureView(this);
+        TextureView view1 = new TextureView(this);
         myPanels[0].addGLEventListener(view1);
         myPanels[0].addMouseMotionListener(view1);
         myPanels[0].addKeyListener(this);
         myPanels[0].setFocusable(true);
-        
+
         FPSAnimator animator = new FPSAnimator(60);
         animator.add(myPanels[0]);
         animator.start();
@@ -107,7 +107,7 @@ public class TexturesExample extends JFrame implements KeyListener {
     private JPanel initSliders() {
         Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
         for (int i = 0; i <= 10; i++) {
-            double x = i/10;
+            double x = i / 10;
             labels.put(i, new JLabel(String.format("%.1f", x)));
         }
 
@@ -115,7 +115,7 @@ public class TexturesExample extends JFrame implements KeyListener {
         myDiffuse = new JSlider(JSlider.VERTICAL, 0, 10, 1);
         mySpecular = new JSlider(JSlider.VERTICAL, 0, 10, 1);
         myPhong = new JSlider(JSlider.VERTICAL, 10, 200, 10);
-        
+
         myAmbient.setValue(0);
         myDiffuse.setValue(0);
         mySpecular.setValue(0);
@@ -145,32 +145,31 @@ public class TexturesExample extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
-        case KeyEvent.VK_1:
-            myModel = Model.TEAPOT;
-            break;
-            
-        case KeyEvent.VK_2:
-            myModel = Model.CUBE;
-            break;
-            
-        case KeyEvent.VK_3:
-            myModel = Model.SPHERE;
-            break;
+            case KeyEvent.VK_1:
+                myModel = Model.TEAPOT;
+                break;
 
-        case KeyEvent.VK_4:
-            myModel = Model.TORUS;
-            break;
-            
-        case KeyEvent.VK_S:
-            mySmooth = !mySmooth;
-            break;
-            
+            case KeyEvent.VK_2:
+                myModel = Model.CUBE;
+                break;
+
+            case KeyEvent.VK_3:
+                myModel = Model.SPHERE;
+                break;
+
+            case KeyEvent.VK_4:
+                myModel = Model.TORUS;
+                break;
+
+            case KeyEvent.VK_S:
+                mySmooth = !mySmooth;
+                break;
+
         }
     }
 
     /**
      * Make sure the main panel keeps the focus so keypress events are handled
-     *
      */
     public void focus() {
         myPanels[0].requestFocus();

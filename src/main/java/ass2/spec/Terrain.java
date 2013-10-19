@@ -1,9 +1,10 @@
 package ass2.spec;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
+import javax.media.opengl.GLProfile;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ public class Terrain {
     private List<Tree> myTrees;
     private List<Road> myRoads;
     private float[] mySunlight;
+    private Texture terrainTexture = null;
 
     /**
      * Create a new terrain
@@ -49,6 +51,10 @@ public class Terrain {
 
     public Terrain(Dimension size) {
         this(size.width, size.height);
+    }
+
+    public void loadTexture(GL2 gl) {
+        terrainTexture = new Texture(GLProfile.getDefault(), gl, "BrightPurpleMarble.png", "png");
     }
 
     public Dimension size() {
@@ -200,10 +206,15 @@ public class Terrain {
         float[] s = {1.0f, 1.0f, 1.0f, 1f};
 
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, pos, 0);
+//        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPOT_DIRECTION, pos, 0);
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, a, 0);
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, d, 0);
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, s, 0);
 
+        // use the texture to modulate diffuse and ambient lighting
+        gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
+        // bind the texture
+        gl.glBindTexture(GL.GL_TEXTURE_2D, terrainTexture.getTextureID());
         for (int i = 0; i < myAltitude.length - 1; i++) {
             for (int j = 0; j < myAltitude[i].length - 1; j++) {
                 drawSection1(gl, i, j);
@@ -220,7 +231,8 @@ public class Terrain {
     private void drawSection1(GL2 gl, int i, int j) {
         gl.glPushMatrix();
 
-        float[] difColor = {0f, 0.7f, 0f, 1};
+//        float[] difColor = {0f, 0.7f, 0f, 1};
+        float[] difColor = {1f, 1f, 1f, 1};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
 
@@ -234,8 +246,11 @@ public class Terrain {
             double s[] = MathUtil.crossProduct(u, v);
 
             gl.glNormal3d(s[0], s[1], s[2]);
+            gl.glTexCoord2d(0, 0);
             gl.glVertex3d(a[0], a[1], a[2]);
+            gl.glTexCoord2d(0, 1);
             gl.glVertex3d(b[0], b[1], b[2]);
+            gl.glTexCoord2d(0.5, 0.5);
             gl.glVertex3d(c[0], c[1], c[2]);
         }
         gl.glEnd();
@@ -248,7 +263,8 @@ public class Terrain {
 
         gl.glTranslated(i, 0, j);
 
-        float[] difColor = {0f, 0f, 0.7f, 1};
+//        float[] difColor = {0f, 0f, 0.7f, 1};
+        float[] difColor = {1f, 1f, 1f, 1};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
 
@@ -262,8 +278,11 @@ public class Terrain {
             double s[] = MathUtil.crossProduct(u, v);
 
             gl.glNormal3d(s[0], s[1], s[2]);
+            gl.glTexCoord2d(0, 1);
             gl.glVertex3d(a[0], a[1], a[2]);
+            gl.glTexCoord2d(1, 1);
             gl.glVertex3d(b[0], b[1], b[2]);
+            gl.glTexCoord2d(0.5, 0.5);
             gl.glVertex3d(c[0], c[1], c[2]);
         }
         gl.glEnd();
@@ -276,7 +295,8 @@ public class Terrain {
 
         gl.glTranslated(i, 0, j);
 
-        float[] difColor = {0.7f, 0f, 0f, 1};
+//        float[] difColor = {0.7f, 0f, 0f, 1};
+        float[] difColor = {1f, 1f, 1f, 1};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
 
@@ -290,8 +310,11 @@ public class Terrain {
             double s[] = MathUtil.crossProduct(u, v);
 
             gl.glNormal3d(s[0], s[1], s[2]);
+            gl.glTexCoord2d(1, 1);
             gl.glVertex3d(a[0], a[1], a[2]);
+            gl.glTexCoord2d(1, 0);
             gl.glVertex3d(b[0], b[1], b[2]);
+            gl.glTexCoord2d(0.5, 0.5);
             gl.glVertex3d(c[0], c[1], c[2]);
         }
         gl.glEnd();
@@ -304,7 +327,8 @@ public class Terrain {
 
         gl.glTranslated(i, 0, j);
 
-        float[] difColor = {0.7f, 0.7f, 0.7f, 1};
+//        float[] difColor = {0.7f, 0.7f, 0.7f, 1};
+        float[] difColor = {1f, 1f, 1f, 1};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
 
@@ -318,8 +342,11 @@ public class Terrain {
             double s[] = MathUtil.crossProduct(u, v);
 
             gl.glNormal3d(s[0], s[1], s[2]);
+            gl.glTexCoord2d(1, 0);
             gl.glVertex3d(a[0], a[1], a[2]);
+            gl.glTexCoord2d(0, 0);
             gl.glVertex3d(b[0], b[1], b[2]);
+            gl.glTexCoord2d(0.5, 0.5);
             gl.glVertex3d(c[0], c[1], c[2]);
         }
         gl.glEnd();

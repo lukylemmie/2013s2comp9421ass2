@@ -3,7 +3,6 @@ package texturesExample;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.List;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -11,12 +10,11 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
 
+import ass2.spec.Texture;
 import com.jogamp.opengl.util.gl2.GLUT;
 
-import lightingExample.Polygon;
-
 /**
- * COMMENT: Comment CrossSectionView 
+ * COMMENT: Comment CrossSectionView
  *
  * @author malcolmr
  */
@@ -49,7 +47,7 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         // backface culling
         gl.glEnable(GL.GL_CULL_FACE);
         gl.glCullFace(GL.GL_BACK);
-        
+
         // enable lighting, turn on light 0
         gl.glEnable(GL2.GL_LIGHTING);
         gl.glEnable(GL2.GL_LIGHT0);
@@ -60,7 +58,7 @@ public class TextureView implements GLEventListener, MouseMotionListener {
 
         // enable texturing
         gl.glEnable(GL.GL_TEXTURE_2D);
-        myTexture = new Texture(GLProfile.getDefault(), gl, "BrightPurpleMarble.png", "png");
+        myTexture = new Texture(GLProfile.getDefault(), gl, "kittens.jpg", "jpg");
     }
 
     @Override
@@ -79,19 +77,19 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         gl.glLoadIdentity();
 
         // set the lights
-        
+
         setLighting(gl);
 
         // rotate the camera 
-        
+
         gl.glRotated(myRotateCameraX, 1, 0, 0);
         gl.glRotated(myRotateCameraY, 0, 1, 0);
-        
+
         // bind the texture
         gl.glBindTexture(GL.GL_TEXTURE_2D, myTexture.getTextureID());
         // use the texture to modulate diffuse and ambient lighting
         gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
-        
+
         // draw the shape
         drawShape(gl);
 
@@ -105,46 +103,46 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         // Set the reflection coefficients all to 1
         // Normally these values would be tuned to get a particular appearance
 
-        float[] rhoA = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-        float[] rhoD = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-        float[] rhoS = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
+        float[] rhoA = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
+        float[] rhoD = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
+        float[] rhoS = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT, rhoA, 0);
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, rhoD, 0);
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, rhoS, 0);
 
         // Set the shininess (i.e. the Phong exponent)
-        
+
         int phong = myModel.getPhong();
         gl.glMaterialf(GL2.GL_FRONT, GL2.GL_SHININESS, phong);
 
         // Draw the model
-        
+
         gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
         switch (myModel.getModel()) {
 
-        case TEAPOT:
-            // the builtin teapot is back-to-front
-            // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/glutSolidTeapot.3.html
-            gl.glFrontFace(GL2.GL_CW);
-            glut.glutSolidTeapot(1);
-            gl.glFrontFace(GL2.GL_CCW);
-            break;
+            case TEAPOT:
+                // the builtin teapot is back-to-front
+                // https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/glutSolidTeapot.3.html
+                gl.glFrontFace(GL2.GL_CW);
+                glut.glutSolidTeapot(1);
+                gl.glFrontFace(GL2.GL_CCW);
+                break;
 
-        case CUBE:
-            drawCube(gl);
-            break;
+            case CUBE:
+                drawCube(gl);
+                break;
 
-        case SPHERE:
-            // the built in sphere does not have texture coordinates set
-            glut.glutSolidSphere(1, 20, 20);
-            break;
+            case SPHERE:
+                // the built in sphere does not have texture coordinates set
+                glut.glutSolidSphere(1, 20, 20);
+                break;
 
-        case TORUS:
-            // the built in torus does not have texture coordinates set
-            glut.glutSolidTorus(0.5, 1.5, 20, 20);
-            break;
+            case TORUS:
+                // the built in torus does not have texture coordinates set
+                glut.glutSolidTorus(0.5, 1.5, 20, 20);
+                break;
 
         }
     }
@@ -155,7 +153,7 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         gl.glBegin(GL2.GL_POLYGON);
         {
             // set all four normals to the face normal
-            gl.glNormal3d(0, -1, 0);            
+            gl.glNormal3d(0, -1, 0);
 
             // set texture coordinates for each vertex
             gl.glTexCoord2d(0, 0);
@@ -173,9 +171,13 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         gl.glBegin(GL2.GL_POLYGON);
         {
             gl.glNormal3d(0, 1, 0);
+            gl.glTexCoord2d(0, 0);
             gl.glVertex3d(1, 1, -1);
+            gl.glTexCoord2d(1, 0);
             gl.glVertex3d(-1, 1, -1);
+            gl.glTexCoord2d(1, 1);
             gl.glVertex3d(-1, 1, 1);
+            gl.glTexCoord2d(0, 1);
             gl.glVertex3d(1, 1, 1);
         }
         gl.glEnd();
@@ -225,8 +227,8 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         gl.glEnd();
 
     }
-    
-    
+
+
     private void setLighting(GL2 gl) {
         gl.glShadeModel(myModel.isSmooth() ? GL2.GL_SMOOTH : GL2.GL_FLAT);
 
@@ -236,10 +238,10 @@ public class TextureView implements GLEventListener, MouseMotionListener {
         gl.glRotated(myRotateLightX, 1, 0, 0);
         gl.glRotated(myRotateLightY, 0, 1, 0);
 
-        float[] pos = new float[] { 0.0f, 0.0f, 4.0f, 1.0f };
+        float[] pos = new float[]{0.0f, 0.0f, 4.0f, 1.0f};
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, pos, 0);
         gl.glPopMatrix();
-        
+
         // set the intensities
 
         float ambient = myModel.getAmbient();
@@ -264,7 +266,7 @@ public class TextureView implements GLEventListener, MouseMotionListener {
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width,
-            int height) {
+                        int height) {
 
         GL2 gl = drawable.getGL().getGL2();
 
@@ -296,8 +298,7 @@ public class TextureView implements GLEventListener, MouseMotionListener {
                 // button 1 moves the camera
                 myRotateCameraY += dx * ROTATION_SCALE;
                 myRotateCameraX += dy * ROTATION_SCALE;
-            }
-            else {
+            } else {
                 // other buttons move the light
                 myRotateLightY += dx * ROTATION_SCALE;
                 myRotateLightX += dy * ROTATION_SCALE;

@@ -161,8 +161,8 @@ public class Tree {
     public void draw(GL2 gl) {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPushMatrix();
-        gl.glTranslated(myPos[0], myPos[1], myPos[2]);
-        gl.glScalef(0.5f, 0.5f, 0.5f);
+        gl.glTranslated(myPos[0], myPos[1] + 0.5, myPos[2]);
+        gl.glScalef(0.2f, 0.2f, 0.2f);
 
         // use the texture to modulate diffuse and ambient lighting
         gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);

@@ -68,6 +68,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
         myTerrain = new Terrain(altitudeSet3);
         myFloor = new Floor(10, 10);
         myTree = new Tree(0, 0, 0);
+        myTerrain.addTree(0, 0);
 //        myCar = new Car();
         myCamera = new MyCamera();
     }
@@ -127,7 +128,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
 
         myFloor.draw(gl);
 //        myCar.draw(gl);
-        myTree.draw(gl);
+//        myTree.draw(gl);
         myTerrain.draw(gl);
     }
 

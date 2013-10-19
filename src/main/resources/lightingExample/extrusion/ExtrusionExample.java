@@ -160,18 +160,18 @@ public class ExtrusionExample extends JFrame implements ItemListener {
         // A rectangle
 
         Polygon rectangle = new Polygon();
-        rectangle.addPoint(3 * SCALE, 0.25 * SCALE, 0);
-        rectangle.addPoint(-3 * SCALE, 0.25 * SCALE, 0);
-        rectangle.addPoint(-3 * SCALE, 0.5 * SCALE, 0);
-        rectangle.addPoint(-3.5 * SCALE, 0.5 * SCALE, 0);
-        rectangle.addPoint(-3.5 * SCALE, -0.5 * SCALE, 0);
-        rectangle.addPoint(-3 * SCALE, -0.5 * SCALE, 0);
-        rectangle.addPoint(-3 * SCALE, -0.25 * SCALE, 0);
-        rectangle.addPoint(3 * SCALE, -0.25 * SCALE, 0);
-        rectangle.addPoint(3 * SCALE, -0.5 * SCALE, 0);
-        rectangle.addPoint(3.5 * SCALE, -0.5 * SCALE, 0);
-        rectangle.addPoint(3.5 * SCALE, 0.5 * SCALE, 0);
-        rectangle.addPoint(3 * SCALE, 0.5 * SCALE, 0);
+        rectangle.addPoint(2 * SCALE, 0.25 * SCALE, 0);
+        rectangle.addPoint(-2 * SCALE, 0.25 * SCALE, 0);
+//        rectangle.addPoint(-3 * SCALE, 0.5 * SCALE, 0);
+//        rectangle.addPoint(-3.5 * SCALE, 0.5 * SCALE, 0);
+//        rectangle.addPoint(-3.5 * SCALE, -0.5 * SCALE, 0);
+//        rectangle.addPoint(-3 * SCALE, -0.5 * SCALE, 0);
+        rectangle.addPoint(-2 * SCALE, -0.25 * SCALE, 0);
+        rectangle.addPoint(2 * SCALE, -0.25 * SCALE, 0);
+//        rectangle.addPoint(3 * SCALE, -0.5 * SCALE, 0);
+//        rectangle.addPoint(3.5 * SCALE, -0.5 * SCALE, 0);
+//        rectangle.addPoint(3.5 * SCALE, 0.5 * SCALE, 0);
+//        rectangle.addPoint(3 * SCALE, 0.5 * SCALE, 0);
         myCrossSections.put("Rectangle", rectangle);
 
     }

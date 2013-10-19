@@ -7,21 +7,35 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 /**
- * COMMENT: Comment LevelIO 
+ * COMMENT: Comment LevelIO
  *
  * @author malcolmr
  */
 public class LevelIO {
+    static Logger logger = Logger.getLogger(LevelIO.class.getName());
+    private static final double[][] altitudeSet3 = new double[][]
+            {
+                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 1, 2, 1, 0, 0, 0},
+                    {0, 0, 1, 2, 3, 2, 1, 0, 0},
+                    {0, 1, 2, 3, 4, 3, 2, 1, 0},
+                    {0, 0, 1, 2, 3, 2, 1, 0, 0},
+                    {0, 0, 0, 1, 2, 1, 0, 0, 0},
+                    {0, 0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0, 0}
+            };
 
     /**
      * Load a terrain object from a JSON file
-     * 
+     *
      * @param mapFile
      * @return
      * @throws java.io.FileNotFoundException
@@ -37,11 +51,11 @@ public class LevelIO {
         Terrain terrain = new Terrain(width, depth);
 
         JSONArray jsonSun = jsonTerrain.getJSONArray("sunlight");
-        float dx = (float)jsonSun.getDouble(0);
-        float dy = (float)jsonSun.getDouble(1);
-        float dz = (float)jsonSun.getDouble(2);
+        float dx = (float) jsonSun.getDouble(0);
+        float dy = (float) jsonSun.getDouble(1);
+        float dz = (float) jsonSun.getDouble(2);
         terrain.setSunlightDir(dx, dy, dz);
-       
+
         JSONArray jsonAltitude = jsonTerrain.getJSONArray("altitude");
         for (int i = 0; i < jsonAltitude.length(); i++) {
             int x = i % width;
@@ -60,16 +74,16 @@ public class LevelIO {
                 terrain.addTree(x, z);
             }
         }
-        
+
         if (jsonTerrain.has("roads")) {
             JSONArray jsonRoads = jsonTerrain.getJSONArray("roads");
             for (int i = 0; i < jsonRoads.length(); i++) {
                 JSONObject jsonRoad = jsonRoads.getJSONObject(i);
                 double w = jsonRoad.getDouble("width");
-                
+
                 JSONArray jsonSpine = jsonRoad.getJSONArray("spine");
                 double[] spine = new double[jsonSpine.length()];
-                
+
                 for (int j = 0; j < jsonSpine.length(); j++) {
                     spine[j] = jsonSpine.getDouble(j);
                 }
@@ -81,24 +95,28 @@ public class LevelIO {
 
     /**
      * Write Terrain to a JSON file
-     * 
+     *
      * @param file
      * @throws java.io.IOException
      */
     public static void save(Terrain terrain, File file) throws IOException {
+        logger.info("Starting save function");
         JSONObject json = new JSONObject();
-                
+
+        logger.info("Saving terrain size");
         Dimension size = terrain.size();
         json.put("width", size.width);
         json.put("depth", size.height);
 
+        logger.info("Saving sunlight info");
         JSONArray jsonSun = new JSONArray();
         float[] sunlight = terrain.getSunlight();
         jsonSun.put(sunlight[0]);
         jsonSun.put(sunlight[1]);
         jsonSun.put(sunlight[2]);
         json.put("sunlight", jsonSun);
-        
+
+        logger.info("Saving altitude info");
         JSONArray altitude = new JSONArray();
         for (int i = 0; i < size.width; i++) {
             for (int j = 0; j < size.height; j++) {
@@ -106,7 +124,7 @@ public class LevelIO {
             }
         }
         json.put("altitude", altitude);
-        
+
         JSONArray trees = new JSONArray();
         for (Tree t : terrain.trees()) {
             JSONObject j = new JSONObject();
@@ -121,11 +139,11 @@ public class LevelIO {
         for (Road r : terrain.roads()) {
             JSONObject j = new JSONObject();
             j.put("width", r.width());
-            
+
             JSONArray spine = new JSONArray();
             int n = r.size();
-            
-            for (int i = 0; i <= n*3; i++) {
+
+            for (int i = 0; i <= n * 3; i++) {
                 double[] p = r.controlPoint(i);
                 spine.put(p[0]);
                 spine.put(p[1]);
@@ -140,14 +158,15 @@ public class LevelIO {
         out.close();
 
     }
-    
+
     /**
      * For testing.
-     * 
+     *
      * @param args
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
+//        Terrain myTerrain = new Terrain(altitudeSet3);
         Terrain terrain = LevelIO.load(new File(args[0]));
         LevelIO.save(terrain, new File(args[1]));
     }

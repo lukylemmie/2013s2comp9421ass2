@@ -55,6 +55,9 @@ public class Terrain {
 
     public void loadTexture(GL2 gl) {
         terrainTexture = new Texture(GLProfile.getDefault(), gl, "BrightPurpleMarble.png", "png");
+        for (Tree tree : myTrees) {
+            tree.loadTexture(gl);
+        }
     }
 
     public Dimension size() {
@@ -226,6 +229,10 @@ public class Terrain {
 
 
         gl.glPopMatrix();
+
+        for (Tree tree : myTrees) {
+            tree.draw(gl);
+        }
     }
 
     private void drawSection1(GL2 gl, int i, int j) {
@@ -352,5 +359,9 @@ public class Terrain {
         gl.glEnd();
 
         gl.glPopMatrix();
+    }
+
+    public void fixSunlight() {
+        mySunlight[1] = -mySunlight[1];
     }
 }

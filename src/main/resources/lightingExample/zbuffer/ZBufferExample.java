@@ -12,18 +12,18 @@ import javax.swing.JFrame;
 
 import com.jogamp.opengl.util.FPSAnimator;
 
-import lightingExample.Point;
-import lightingExample.Polygon;
+import ass2.spec.Point;
+import ass2.spec.Polygon;
 
 
 /**
- * COMMENT: Comment ZBuffer 
+ * COMMENT: Comment ZBuffer
  *
  * @author malcolmr
  */
 public class ZBufferExample extends JFrame {
 
-    private List<Polygon> myPolygons;   
+    private List<Polygon> myPolygons;
     private GLJPanel[] myPanels;
 
     private Point[] myRedPoints;
@@ -38,7 +38,7 @@ public class ZBufferExample extends JFrame {
     public List<Polygon> getPolygons() {
         return myPolygons;
     }
-    
+
     public void init() {
         // initialisation
         GLProfile glp = GLProfile.getDefault();
@@ -46,7 +46,7 @@ public class ZBufferExample extends JFrame {
 
         initPolygons();
         setSize(1200, 400);
-        
+
         initPanels(caps);
 
         setVisible(true);
@@ -58,49 +58,49 @@ public class ZBufferExample extends JFrame {
      */
     private void initPolygons() {
         myPolygons = new ArrayList<Polygon>();
-        
+
         myRedPoints = new Point[4];
-        myRedPoints[0] = new Point(1,1,-5);
-        myRedPoints[1] = new Point(-1,1,-5);
-        myRedPoints[2] = new Point(-1,-1,-5);
-        myRedPoints[3] = new Point(1,-1,-5);
-        
+        myRedPoints[0] = new Point(1, 1, -5);
+        myRedPoints[1] = new Point(-1, 1, -5);
+        myRedPoints[2] = new Point(-1, -1, -5);
+        myRedPoints[3] = new Point(1, -1, -5);
+
         Polygon p1 = new Polygon();
         p1.setColor(Color.RED);
         for (int i = 0; i < myRedPoints.length; i++) {
-            p1.addPoint(myRedPoints[i]);            
+            p1.addPoint(myRedPoints[i]);
         }
         myPolygons.add(p1);
 
         myBluePoints = new Point[4];
-        myBluePoints[0] = new Point(0,1,-5);
-        myBluePoints[1] = new Point(-2,1,-5);
-        myBluePoints[2] = new Point(-2,-1,-5);
-        myBluePoints[3] = new Point(0,-1,-5);
-        
+        myBluePoints[0] = new Point(0, 1, -5);
+        myBluePoints[1] = new Point(-2, 1, -5);
+        myBluePoints[2] = new Point(-2, -1, -5);
+        myBluePoints[3] = new Point(0, -1, -5);
+
         Polygon p2 = new Polygon();
         p2.setColor(Color.BLUE);
         for (int i = 0; i < myBluePoints.length; i++) {
-            p2.addPoint(myBluePoints[i]);            
+            p2.addPoint(myBluePoints[i]);
         }
         myPolygons.add(p2);
-        
+
         myGreenPoints = new Point[4];
-        myGreenPoints[0] = new Point(2,1,-5);
-        myGreenPoints[1] = new Point(0,1,-5);
-        myGreenPoints[2] = new Point(0,-1,-5);
-        myGreenPoints[3] = new Point(2,-1,-5);
+        myGreenPoints[0] = new Point(2, 1, -5);
+        myGreenPoints[1] = new Point(0, 1, -5);
+        myGreenPoints[2] = new Point(0, -1, -5);
+        myGreenPoints[3] = new Point(2, -1, -5);
 
         Polygon p3 = new Polygon();
         p3.setColor(Color.GREEN);
         for (int i = 0; i < myGreenPoints.length; i++) {
-            p3.addPoint(myGreenPoints[i]);            
+            p3.addPoint(myGreenPoints[i]);
         }
         myPolygons.add(p3);
-        
+
 
     }
-    
+
     private void initPanels(GLCapabilities caps) {
         // create a panel to draw on
         myPanels = new GLJPanel[2];
@@ -122,15 +122,14 @@ public class ZBufferExample extends JFrame {
         myPanels[1].addMouseMotionListener(view1);
         myPanels[1].addKeyListener(view1);
         myPanels[1].setFocusable(true);
-        
+
         FPSAnimator animator = new FPSAnimator(60);
         animator.add(myPanels[0]);
         animator.add(myPanels[1]);
         animator.start();
     }
 
-    
-    
+
     public static void main(String[] args) {
         ZBufferExample zBufferExample = new ZBufferExample();
     }

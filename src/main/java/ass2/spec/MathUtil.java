@@ -1,6 +1,7 @@
 package ass2.spec;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -14,6 +15,7 @@ public class MathUtil {
     private static Logger logger = Logger.getLogger(MathUtil.class.getName());
 
     public static double[] crossProduct(double[] u, double[] v) {
+        logger.setLevel(Level.OFF);
         double[] s = new double[3];
 
         logger.info("u[] = " + u.toString());

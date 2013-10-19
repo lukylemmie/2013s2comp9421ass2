@@ -1,6 +1,6 @@
 package lightingExample.extrusion;
 
-import lightingExample.Point;
+import ass2.spec.Point;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;

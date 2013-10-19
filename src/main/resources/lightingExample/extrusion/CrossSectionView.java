@@ -1,6 +1,6 @@
 package lightingExample.extrusion;
 
-import lightingExample.Polygon;
+import ass2.spec.Polygon;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;

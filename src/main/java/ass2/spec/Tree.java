@@ -76,24 +76,12 @@ public class Tree {
                 gl.glNormal3d(s[0], s[1], s[2]);
                 gl.glTexCoord2d(0, 0);
                 gl.glVertex3d(x0, y0, 0);
-//                if(i == CIRCLE_STEPS - 1){
-//                    gl.glTexCoord2d(1, 0);
-//                }
                 gl.glTexCoord2d(1, 0);
                 gl.glVertex3d(x0, y0, 7);
-//                if(i == CIRCLE_STEPS - 1){
-//                    gl.glTexCoord2d(1, 1);
-//                }
                 gl.glTexCoord2d(1, 1);
                 gl.glVertex3d(x1, y1, 7);
-//                if(i == CIRCLE_STEPS - 1){
-//                    gl.glTexCoord2d(0, 1);
-//                }
                 gl.glTexCoord2d(0, 1);
                 gl.glVertex3d(x1, y1, 0);
-//                if(i == CIRCLE_STEPS - 1){
-//                    gl.glTexCoord2d(0, 0);
-//                }
             }
         }
         gl.glEnd();

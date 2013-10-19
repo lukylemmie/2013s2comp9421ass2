@@ -1,8 +1,8 @@
 package lightingExample.extrusion;
 
 import com.jogamp.opengl.util.FPSAnimator;
-import lightingExample.Point;
-import lightingExample.Polygon;
+import ass2.spec.Point;
+import ass2.spec.Polygon;
 
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLProfile;

@@ -1,7 +1,7 @@
-package lightingExample;
+package ass2.spec;
 
 /**
- * COMMENT: Comment MathUtil 
+ * COMMENT: Comment MathUtil
  *
  * @author malcolmr
  */
@@ -9,7 +9,7 @@ public class MatrixMath {
 
     /**
      * COMMENT: matrixMultiply
-     * 
+     *
      * @param t
      * @param r
      * @return
@@ -22,7 +22,7 @@ public class MatrixMath {
             for (int j = 0; j < 4; j++) {
                 m[i][j] = 0;
                 for (int k = 0; k < 4; k++) {
-                   m[i][j] += p[i][k] * q[k][j]; 
+                    m[i][j] += p[i][k] * q[k][j];
                 }
             }
         }
@@ -44,5 +44,5 @@ public class MatrixMath {
         return u;
     }
 
-    
+
 }

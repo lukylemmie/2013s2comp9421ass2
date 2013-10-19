@@ -1,16 +1,11 @@
 package lightingExample.zbuffer;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
-import lightingExample.Polygon;
+import ass2.spec.Polygon;
 
 /**
  * Simple top-down view

@@ -72,6 +72,7 @@ public class Game extends JFrame implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
 
         gl.glEnable(GL2.GL_DEPTH_TEST);
+        gl.glEnable(GL2.GL_POLYGON_OFFSET_FILL);
 
         // enable lighting, turn on light 0
         gl.glEnable(GL2.GL_LIGHTING);
@@ -84,6 +85,7 @@ public class Game extends JFrame implements GLEventListener {
         // enable texturing
         gl.glEnable(GL.GL_TEXTURE_2D);
         myTerrain.loadTexture(gl);
+        myTerrain.injectRoadAltitude();
     }
 
     @Override

@@ -14,7 +14,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-import lightingExample.Polygon;
+import ass2.spec.Polygon;
 
 /**
  * 3D view with ZBuffer display

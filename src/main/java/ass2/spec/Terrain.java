@@ -6,6 +6,7 @@ import javax.media.opengl.GLProfile;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -29,6 +30,7 @@ public class Terrain {
      * @param depth The number of vertices in the z-direction
      */
     public Terrain(int width, int depth) {
+        logger.setLevel(Level.OFF);
         mySize = new Dimension(width, depth);
         myAltitude = new double[width][depth];
         myTrees = new ArrayList<Tree>();
@@ -51,13 +53,6 @@ public class Terrain {
 
     public Terrain(Dimension size) {
         this(size.width, size.height);
-    }
-
-    public void loadTexture(GL2 gl) {
-        terrainTexture = new Texture(GLProfile.getDefault(), gl, "BrightPurpleMarble.png", "png");
-        for (Tree tree : myTrees) {
-            tree.loadTexture(gl);
-        }
     }
 
     public Dimension size() {
@@ -199,6 +194,16 @@ public class Terrain {
         myRoads.add(road);
     }
 
+    public void loadTexture(GL2 gl) {
+        terrainTexture = new Texture(GLProfile.getDefault(), gl, "BrightPurpleMarble.png", "png");
+        for (Tree tree : myTrees) {
+            tree.loadTexture(gl);
+        }
+        for (Road road : myRoads) {
+            road.loadTexture(gl);
+        }
+    }
+
     public void draw(GL2 gl) {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPushMatrix();
@@ -218,6 +223,7 @@ public class Terrain {
         gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
         // bind the texture
         gl.glBindTexture(GL.GL_TEXTURE_2D, terrainTexture.getTextureID());
+        gl.glPolygonOffset(1.0f, 1.0f);
         for (int i = 0; i < myAltitude.length - 1; i++) {
             for (int j = 0; j < myAltitude[i].length - 1; j++) {
                 drawSection1(gl, i, j);
@@ -232,6 +238,11 @@ public class Terrain {
 
         for (Tree tree : myTrees) {
             tree.draw(gl);
+        }
+
+        gl.glPolygonOffset(0.0f, 0.0f);
+        for (Road road : myRoads) {
+            road.draw(gl);
         }
     }
 
@@ -253,6 +264,7 @@ public class Terrain {
             double s[] = MathUtil.crossProduct(u, v);
 
             gl.glNormal3d(s[0], s[1], s[2]);
+
             gl.glTexCoord2d(0, 0);
             gl.glVertex3d(a[0], a[1], a[2]);
             gl.glTexCoord2d(0, 1);
@@ -363,5 +375,12 @@ public class Terrain {
 
     public void fixSunlight() {
         mySunlight[1] = -mySunlight[1];
+        mySunlight[1] += 1;
+    }
+
+    public void injectRoadAltitude() {
+        for (Road road : myRoads) {
+            road.setMyTerrain(this);
+        }
     }
 }

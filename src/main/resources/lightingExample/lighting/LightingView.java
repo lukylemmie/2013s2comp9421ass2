@@ -3,7 +3,6 @@ package lightingExample.lighting;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.List;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -11,8 +10,6 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
 import com.jogamp.opengl.util.gl2.GLUT;
-
-import lightingExample.Polygon;
 
 /**
  * COMMENT: Comment CrossSectionView

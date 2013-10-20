@@ -56,7 +56,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
                     {8, 2, 10, 6},
                     {10, 6, 2, 8}
             };
-    //    private Car myCar;
+    private Car myCar;
     private Terrain myTerrain;
     private Tree myTree;
     private Floor myFloor;
@@ -69,8 +69,8 @@ public class DrivingGame extends JFrame implements GLEventListener {
         myFloor = new Floor(10, 10);
         myTree = new Tree(0, 0, 0);
         myTerrain.addTree(0, 0);
-//        myCar = new Car();
-        myCamera = new MyCamera();
+        myCar = new Car();
+        myCamera = new MyCamera(myTerrain);
     }
 
     private void run() {

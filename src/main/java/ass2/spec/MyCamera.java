@@ -1,6 +1,8 @@
 package ass2.spec;
 
 import javax.media.opengl.GL2;
+import java.awt.*;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +12,13 @@ import javax.media.opengl.GL2;
  * To change this template use File | Settings | File Templates.
  */
 public class MyCamera {
+    private static Logger logger = Logger.getLogger(MyCamera.class.getName());
     public static final double CAMERA_DIST = 5;
-    private double verticalRotation = 90;
-    private double horizontalRotation = 0;
+    private static final double MAX_VERTICAL_ROTATION = 90;
+    private static final double MIN_VERTICAL_ROTATION = -90;
+    private static final double DISTANCE_BUFFER = 2;
+    private double verticalRotation = 60;
+    private double horizontalRotation = 180;
     private boolean upHeld = false;
     private boolean downHeld = false;
     private boolean leftHeld = false;
@@ -24,10 +30,14 @@ public class MyCamera {
     private boolean qHeld = false;
     private boolean eHeld = false;
     private double xPos = 0;
-    private double yPos = -3;
+    private double yPos = -5;
     private double zPos = 0;
+    private Terrain myTerrain = null;
+    private Dimension terrainSize = null;
 
-    public MyCamera() {
+    public MyCamera(Terrain terrain) {
+        myTerrain = terrain;
+        terrainSize = myTerrain.size();
     }
 
     public void setCamera(GL2 gl) {
@@ -74,10 +84,12 @@ public class MyCamera {
 
     public void verticalRotationUp() {
         verticalRotation++;
+        verticalRotateLimit();
     }
 
     public void verticalRotationDown() {
         verticalRotation--;
+        verticalRotateLimit();
     }
 
     public void horizontalRotationUp() {
@@ -91,29 +103,35 @@ public class MyCamera {
     public void xPosUp() {
         xPos += 0.1 * Math.cos(Math.toRadians(horizontalRotation));
         zPos += 0.1 * Math.sin(Math.toRadians(horizontalRotation));
+        collide();
     }
 
     public void xPosDown() {
         xPos -= 0.1 * Math.cos(Math.toRadians(horizontalRotation));
         zPos -= 0.1 * Math.sin(Math.toRadians(horizontalRotation));
+        collide();
     }
 
     public void yPosUp() {
         yPos += 0.1;
+        collide();
     }
 
     public void yPosDown() {
         yPos -= 0.1;
+        collide();
     }
 
     public void zPosUp() {
         zPos += 0.1 * Math.cos(Math.toRadians(horizontalRotation));
         xPos -= 0.1 * Math.sin(Math.toRadians(horizontalRotation));
+        collide();
     }
 
     public void zPosDown() {
         zPos -= 0.1 * Math.cos(Math.toRadians(horizontalRotation));
         xPos += 0.1 * Math.sin(Math.toRadians(horizontalRotation));
+        collide();
     }
 
     public void setwHeld(boolean wHeld) {
@@ -138,5 +156,28 @@ public class MyCamera {
 
     public void seteHeld(boolean eHeld) {
         this.eHeld = eHeld;
+    }
+
+    private void collide() {
+        double minY = -DISTANCE_BUFFER;
+        if (-xPos >= 0 && -xPos < terrainSize.getWidth() - 1 && -zPos >= 0 && -zPos < terrainSize.getHeight() - 1) {
+            logger.info("xPox = " + xPos);
+            logger.info("terrain width = " + terrainSize.getWidth());
+            logger.info("zPox = " + zPos);
+            logger.info("terrain height = " + terrainSize.getHeight());
+            minY = -myTerrain.altitude(-xPos, -zPos) - DISTANCE_BUFFER;
+        }
+        if (yPos > minY) {
+            yPos = minY;
+        }
+    }
+
+    private void verticalRotateLimit() {
+        if (verticalRotation > MAX_VERTICAL_ROTATION) {
+            verticalRotation = MAX_VERTICAL_ROTATION;
+        }
+        if (verticalRotation < MIN_VERTICAL_ROTATION) {
+            verticalRotation = MIN_VERTICAL_ROTATION;
+        }
     }
 }

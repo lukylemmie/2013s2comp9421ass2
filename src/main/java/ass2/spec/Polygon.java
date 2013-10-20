@@ -5,6 +5,7 @@ import ass2.spec.Point;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.media.opengl.GL2;
@@ -21,6 +22,7 @@ public class Polygon {
     private Color myColor;
 
     public Polygon() {
+        logger.setLevel(Level.OFF);
         myPoints = new ArrayList<Point>();
         myColor = Color.BLACK;
     }

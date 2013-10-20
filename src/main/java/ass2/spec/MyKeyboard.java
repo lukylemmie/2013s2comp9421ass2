@@ -4,6 +4,7 @@ import drivingExample.DrivingGame;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -19,6 +20,7 @@ public class MyKeyboard implements KeyListener {
 
     public MyKeyboard(MyCamera myCamera) {
         this.myCamera = myCamera;
+        logger.setLevel(Level.OFF);
     }
 
     @Override

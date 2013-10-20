@@ -28,6 +28,20 @@ public class MathUtil {
         return s;
     }
 
+    public static double[] sumVectors(double[] u, double[] v) {
+        double[] s = new double[3];
+
+        s[0] = u[0] + v[0];
+        s[1] = u[1] + v[1];
+        s[2] = u[2] + v[2];
+
+        return s;
+    }
+
+    public static double magnitude(double[] u) {
+        return Math.sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+    }
+
     public static double cleanNumberTo10dp(double x) {
         x = Math.round(x * (1e10)) / 1e10;
         return x;

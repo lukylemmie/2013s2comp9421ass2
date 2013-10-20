@@ -17,15 +17,14 @@ import java.util.logging.Logger;
 public class Road {
     private static Logger logger = Logger.getLogger(Road.class.getName());
     private Texture roadTexture = null;
-
-    public void setMyTerrain(Terrain myTerrain) {
-        this.myTerrain = myTerrain;
-    }
-
     private Terrain myTerrain;
     private List<Double> myPoints;
     private double myWidth;
     private List<Polygon> myMesh = null;
+
+    public void setMyTerrain(Terrain myTerrain) {
+        this.myTerrain = myTerrain;
+    }
 
     /**
      * Create a new road starting at the specified point
@@ -50,6 +49,7 @@ public class Road {
         for (int i = 0; i < spine.length; i++) {
             myPoints.add(spine[i]);
         }
+        logger.setLevel(Level.OFF);
     }
 
     /**

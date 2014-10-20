@@ -1,0 +1,1 @@
+{"altitude":[0,0,1,1],"width":2,"trees":[],"sunlight":[0,-1,0],"roads":[],"depth":2}

@@ -41,6 +41,7 @@ public class Terrain {
     //
     @Deprecated
     public Terrain(double[][] altitudeSet) {
+        logger.setLevel(Level.OFF);
         mySize = new Dimension(altitudeSet.length, altitudeSet[0].length);
         myAltitude = altitudeSet.clone();
         myTrees = new ArrayList<Tree>();
@@ -253,6 +254,8 @@ public class Terrain {
         float[] difColor = {1f, 1f, 1f, 1};
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, difColor, 0);
+//        gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT, difColor, 0);
+//        gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, difColor, 0);
 
         gl.glBegin(GL2.GL_TRIANGLES);
         {

@@ -127,8 +127,7 @@ public class DrivingGame extends JFrame implements GLEventListener {
         myCamera.setCamera(gl);
 
         myFloor.draw(gl);
-//        myCar.draw(gl);
-//        myTree.draw(gl);
+        myCar.draw(gl);
         myTerrain.draw(gl);
     }
 

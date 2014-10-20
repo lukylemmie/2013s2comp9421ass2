@@ -5,6 +5,7 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.GLProfile;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -25,6 +26,7 @@ public class Tree {
     private double theta3 = 0;
 
     public Tree(double x, double y, double z) {
+        logger.setLevel(Level.OFF);
         myPos = new double[3];
         myPos[0] = x;
         myPos[1] = y;

@@ -13,6 +13,7 @@ import javax.media.opengl.awt.GLJPanel;
 import javax.media.opengl.glu.GLU;
 import javax.swing.*;
 
+
 /**
  * COMMENT: Comment Game
  *
@@ -22,10 +23,12 @@ public class Game extends JFrame implements GLEventListener {
     private static final float FOV = 90;
     private Terrain myTerrain;
     private MyCamera myCamera;
+//    private Helicopter helicopter;
 
     public Game(Terrain terrain) {
         myTerrain = terrain;
         myCamera = new MyCamera(terrain);
+//        helicopter = new Helicopter();
         terrain.fixSunlight();
     }
 
@@ -78,6 +81,12 @@ public class Game extends JFrame implements GLEventListener {
         gl.glEnable(GL2.GL_LIGHTING);
         gl.glEnable(GL2.GL_LIGHT0);
 
+        // enable transparency
+        gl.glEnable(GL2.GL_BLEND);
+//        gl.glDepthMask(false);
+//        gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE);
+        gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
+
         // normalise normals (!)
         // this is necessary to make lighting work properly
         gl.glEnable(GL2.GL_NORMALIZE);
@@ -86,6 +95,7 @@ public class Game extends JFrame implements GLEventListener {
         gl.glEnable(GL.GL_TEXTURE_2D);
         myTerrain.loadTexture(gl);
         myTerrain.injectRoadAltitude();
+//        helicopter.loadTexture(gl);
     }
 
     @Override
@@ -97,6 +107,7 @@ public class Game extends JFrame implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
 
         myCamera.setCamera(gl);
+//        helicopter.draw(gl);
         myTerrain.draw(gl);
     }
 
